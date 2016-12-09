@@ -3,7 +3,7 @@ var config = require("./config.js");
 
 var mAPIServer = express();
 
-mAPIServer.use(express.static(__dirname + '/public'));
+mAPIServer.use(express.static('public'));
 
 function startmAPIServer(){
 	mAPIServer.listen(config.express.port);
