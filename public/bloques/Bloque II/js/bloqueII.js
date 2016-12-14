@@ -2,6 +2,7 @@ var app = function () {
      view.on("click",function(evt){
         pais(latlng(evt));
      });
+    responsiveVoice.setDefaultVoice("Spanish Latin American Female");
     responsiveVoice.speak("Bienvenido al Bloque 2");
     responsiveVoice.speak("Leccion 1");
     responsiveVoice.speak("Componentes Naturales");
@@ -74,7 +75,6 @@ function geografia(pais){
 }
 
 function getSelectionText() {
-    responsiveVoice.setDefaultVoice("Spanish Latin American Female");
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();

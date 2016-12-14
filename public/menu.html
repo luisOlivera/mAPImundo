@@ -3,61 +3,53 @@
 <head>
 	<meta charset="UTF-8">
 	<title>mAPImundo</title>
-  <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/assets/css/menu.css">
-	<link rel="icon" href="/assets/img/icon.ico">
+  <link rel="stylesheet" href="assets/css/leapstrap.css" media="screen">
+  <link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/menu.css">
+	<link rel="icon" href="assets/img/icon.ico">
+  <script src="assets/js/librerias/jquery-3.1.1.js"></script>
+  <script src="assets/js/librerias/leap-0.6.4.js"></script>
+  <script src="assets/js/librerias/leapstrap.js"></script>  
 </head>
 <body>
-<h1>INDICE</h1>
-  <div class="conteneur">
-    <div class="circle">
-    <a href="#">
-      <div class="point_general point1">
-        <span class="texte">
-        Bloque I 
-        <br><br>
-        El estudio de la tierra
-        </span>
+  <h1 id="titulo">INDICE</h1>
+  <header>
+    <a href="#">    
+      <div class="contenedor leap-interactive" id="uno">
+        <div class="icon">Bloque I</div>
+        <p class="texto">El estudio de la tierra</p>
       </div>
     </a>
     <a href="bloques/Bloque II/bloqueII.html">
-      <div class="point_general point2">
-        <span class="texte">
-        Bloque II 
-        <br><br>
-        La naturaleza y el desarrollo sustentable
-        </span>
+      <div class="contenedor leap-interactive" id="dos">
+        <div class="icon">Bloque II</div>
+        <p class="texto"> La naturaleza y el desarrollo sustentable</p>
       </div>
     </a>
     <a href="#">
-      <div class="point_general point3">
-        <span class="texte">
-        Bloque III 
-        <br><br>
-        La población mundial y su diversidad
-        </span>
+      <div class="contenedor leap-interactive" id="tres">
+        <div class="icon">Bloque III</div>
+        <p class="texto">La población mundial y su diversidad</p>
       </div>
     </a>
     <a href="#">
-      <div class="point_general point4">
-        <span class="texte">
-        Bloque IV 
-        <br><br>
-        La economia mundial
-        </span>
+      <div class="contenedor leap-interactive" id="cuatro">
+        <div class="icon">Bloque IV</div>
+        <p class="texto">La economia mundial</p>
       </div>
     </a>
     <a href="#">
-      <div class="point_general point5">
-        <span class="texte">
-        Bloque V 
-        <br><br>
-        Retos locales en el contexto mundial
-        </span>
+      <div class="contenedor leap-interactive" id="cinco">
+        <div class="icon">Bloque V</div>
+        <p class="texto">Retos locales en el contexto mundial</p>
       </div>
     </a>
-    </div>
-  </div>
-  <a href="index.html"><i id="home" class="fa fa-home" aria-hidden="true"></i></a>
+  </header>  
+  <a href="index.html"><i id="home" class="fa fa-home leap-interactive" aria-hidden="true"></i></a>
+  <script>
+    LeapManager.init({
+      interactiveSelector:"a",
+      maxCursors:1});
+  </script>
 </body>
 </html>

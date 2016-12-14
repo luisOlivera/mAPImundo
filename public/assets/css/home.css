@@ -66,7 +66,7 @@ svg {
   position: absolute;
   width: 100%;
   height: 100%;
-  font: 7.5em/1 Open Sans, Impact;
+  font: 6.7em/1 Open Sans, Impact;
 }
 
 @keyframes mapfront_spin {
@@ -180,7 +180,15 @@ canvas{
   color: #FFFFFF;
   font-size: 80px;
 }
+
 #play:hover{
+  color: #00EFF2;
+  font-size: 100px;
+  top: 82.5%;
+  left: 47.5%;
+}
+
+#play.hover{
   color: #00EFF2;
   font-size: 100px;
   top: 82.5%;
