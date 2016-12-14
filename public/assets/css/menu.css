@@ -116,3 +116,33 @@ p.texto{
 .contenedor.hover .icon{
   -webkit-box-shadow:0px 0px 0px 0px rgba(255,255,255,.6);
 }
+
+.leap-pointable-cursor {
+  border: 3px solid #DDDDDD;
+  box-shadow: 0 0 15px #A2A2A2;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0);
+  border-right: 3px solid rgba(0, 0, 0, 0);
+  border-left: 3px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+.leap-pointable-cursor:after {
+  border: 2px solid #DDDDDD;
+  box-shadow: 0 0 15px #A2A2A2;
+  position: absolute;
+  top: 32%;
+  left: 30%;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0);
+  border-right: 2px solid rgba(0, 0, 0, 0);
+  border-left: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  content: "";
+  opacity: .9;
+}

@@ -7374,14 +7374,14 @@ a[data-toggle="collapse"] .panel-title {
 }
 
 .leap-cursor.active-timer {
-  background-color: #33D401;
-  border: 3px solid #33D401;
-  box-shadow: 0 0 15px #33D401;
+  background-color: #3B3B3B;
+  border: 3px solid #3B3B3B;
+  box-shadow: 0 0 15px #3B3B3B;
 }
 
 .leap-cursor.active-timer:after {
-  background-color: #32B200;
-  border: 2px solid #32B200;
-  box-shadow: 0 0 15px #32B200;
+  background-color: #3B3B3B;
+  border: 2px solid #3B3B3B;
+  box-shadow: 0 0 15px #3B3B3B;
 }
 
