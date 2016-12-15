@@ -2078,9 +2078,6 @@ LeapElement.prototype = {
     isHoverable: function() {
         return this.dom.getAttribute("leap-disable-hover") !== "true";
     },
-    isNoneStart: function() {
-        return this.dom.getAttribute("noneStart") !== "true";
-    },
     hasRelay: function() {
       return this.dom.getAttribute("leap-relay") !== null;
     },
@@ -2384,13 +2381,8 @@ Cursor.prototype = {
             element.addClass("hover");
         }
         if (this._tapCapable && this.manager.isHoverTapEnabled() && this.currentClickDelay && element.isTappable()) {
-            if (element.isNoneStart()) {
-               this.startTimer();
-            }
+            this.startTimer();
         }
-        //if (this._tapCapable && this.currentClickDelay && element.isTappable()) {
-          //  this.startTimer();
-        //}
     },
     onElementDown: function(element) {
         element.addClass("leap-down");
@@ -3164,8 +3156,8 @@ var LeapManager = (function() {
         simulateWithMouse: false,
         enableInBackground: false,
         cacheQueries: true,
-        enableMetaGestures: false,
-        enableDefaultMetaGestureActions: false,
+        enableMetaGestures: true,
+        enableDefaultMetaGestureActions: true,
         metaGestureMaxDelay: 1200,
         greedySelector: null,
         cacheAllQueries: false,
@@ -3195,11 +3187,11 @@ var LeapManager = (function() {
         },
         cursorConfig: {
             multitapEnabled: false,
-            clickDelay: 2000
+            clickDelay: 1000
         },
         mouseCursorConfig: {
             multitapEnabled: false,
-            clickDelay: 2000
+            clickDelay: 1000
         },
         loopConfig: {
             enableGestures: true
@@ -3286,7 +3278,7 @@ var LeapManager = (function() {
                 for (pointableIndex = 0; pointableIndex < frame.pointables.length && pointableIndex < this.maxCursors; pointableIndex++) {
                     pointable = frame.pointables[pointableIndex];
                     finger = frame.fingers[1].extended;
-                    if (pointable&&finger) {
+                    if (pointable && finger) {
                         posX = LeapManagerUtils.map(pointable.tipPosition[0], this.boundary.left, this.boundary.right, 0, 1);
                         posY = LeapManagerUtils.map(pointable.tipPosition[1], this.boundary.bottom, this.boundary.top, 1, 0);
                         posZ = pointable.tipPosition[2]; 
@@ -3300,6 +3292,7 @@ var LeapManager = (function() {
                     }
                 }
             }
+
             this.cursorManager.pruneCursors(LEAP_SOURCE, currentCursors);
         },
         updateHands: function(frame) {

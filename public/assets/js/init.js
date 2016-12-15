@@ -1,8 +1,7 @@
- var view ;
+ var view,lat,lng;
  require([
    "esri/Map",
-   "esri/views/SceneView",
-   "dojo/domReady!"
+   "esri/views/SceneView"
  ], function(Map, SceneView) {
    var map = new Map({
      basemap: "satellite",
@@ -17,3 +16,19 @@
      zoom: 5
    });
  });
+
+ function _pais(evt){
+    require(["esri/geometry/ScreenPoint"], function(ScreenPoint){
+        var sp = new ScreenPoint({
+            x: evt.x+14,
+            y: evt.y-42
+        });
+        var punto = view.toMap(sp);
+        if (punto) {
+            if(punto.latitude && punto.longitude){
+                lat = punto.latitude;
+                lng = punto.longitude;   
+            }
+        }
+    });
+}

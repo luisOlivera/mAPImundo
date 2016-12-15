@@ -5,12 +5,16 @@
 	<title>Bloque II</title>
 	<link rel="icon" href="../../assets/img/icon.ico">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+	<link rel="stylesheet" href="../../assets/css/leapstrap.css">
 	<link rel="stylesheet" href="../../assets/css/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../../assets/css/estilos.css">
 	<link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
 	<script src="https://js.arcgis.com/4.1/"></script>
 	<script src="../../assets/js/funciones.js"></script>
 	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+	<script src="../../assets/js/librerias/jquery-3.1.1.js"></script>
+  	<script src="../../assets/js/librerias/leap-0.6.4.js"></script>
+  	<script src="../../assets/js/librerias/leapstrap.js"></script>  
 </head>
 <body onload="app()">
 	<ul class="topnav" id="mytopnav">
@@ -28,17 +32,16 @@
  		 </div>
 	</div>
 	<div id="app">
-		<div id="viewDiv"></div>
+		<div id="viewDiv" onclick="pais(event)" class="leap-interactive"></div>
 	    <div id="informacion">
 	    	<h1 align="center" id="pais">Instrucciones</h1>
 	    	<div id="texto">
-	    	<h1 style="text-align: center;">
-	    		Da clic sobre un país del globo terráqueo y observa su información geográfica.
-	    	</h1>
+	    		<h1 style="text-align: center; font-size: 30px">
+	    			Da clic sobre un país del globo terráqueo y observa su información geográfica.
+	    		</h1>
 	    	</div>
 	    </div>
 	</div>
-	<script src="../../assets/js/librerias/jquery-3.1.1.js"></script>
 	<script src="../../assets/js/init.js"></script>
 	<script src="js/librerias/txtwiki.js"></script>
 	<script src="js/librerias/wiky.js"></script>

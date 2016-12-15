@@ -1,11 +1,9 @@
 var app = function () {
-     view.on("click",function(evt){
-        pais(latlng(evt));
-     });
     responsiveVoice.setDefaultVoice("Spanish Latin American Female");
     responsiveVoice.speak("Bienvenido al Bloque 2");
     responsiveVoice.speak("Leccion 1");
-    responsiveVoice.speak("Componentes Naturales");
+    responsiveVoice.speak("Componentes Naturales de la tierra");
+    setTimeout(initCursor, 10000)
 }
 
 var latlng = function (evt) {
@@ -19,17 +17,20 @@ var latlng = function (evt) {
     return obj;
 }
 
-var pais = function (obj) {
-	var url='https://maps.googleapis.com/maps/api/geocode/json?latlng='+obj.lat+','+obj.lng+'&result_type=country&key=AIzaSyD-EI11dYryAArSWeTEGigQukmcM3TZDSA';
+var pais = function (evt) {
+    _pais(evt);
+	var url='https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&result_type=country&key=AIzaSyD-EI11dYryAArSWeTEGigQukmcM3TZDSA';
 	$.ajax({
 		url : url,
 		type : "GET",
 		dataType: "json" ,
 		success: function(data){
-            var nombre = data.results[0].formatted_address;
-            responsiveVoice.speak(nombre);
-            $("#pais").html(nombre);
-            geografia(nombre);
+            if (data.status==="OK") {
+                var nombre = data.results[0].formatted_address;
+                responsiveVoice.speak(nombre);
+                $("#pais").html(nombre);
+                geografia(nombre);
+            }
         }
 	});
 }
@@ -74,18 +75,25 @@ function geografia(pais){
 	});
 }
 
-function getSelectionText() {
-    var text = "";
-    if (window.getSelection) {
-        text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
-    }
-    return text;
+function mostrarInfo(evt){
+    _pais(evt);
+    require(["esri/geometry/Point"], function(Point) {
+        var point = new Point({
+            latitude: lat,
+            longitude: lng
+        });
+        
+        view.popup.open({
+            title: "Coordenadas: [" + lng + ", " + lat + "]",
+            location: point
+        });
+    });
 }
-$(document).ready(function (){
-   $(document).mouseup(function (e){
-    responsiveVoice.cancel(); 
-    responsiveVoice.speak(getSelectionText());
-   })
-});
+
+function initCursor(){
+    LeapManager.init({
+      interactiveSelector:"a",
+      maxCursors:1});
+    LeapManager.cursorConfig.clickDelay = 3000;
+    console.log("Cursor Iniciado")
+}
