@@ -1,10 +1,11 @@
  var view,lat,lng;
+
  require([
    "esri/Map",
    "esri/views/SceneView"
  ], function(Map, SceneView) {
    var map = new Map({
-     basemap: "satellite",
+     basemap: "streets",
      ground: "world-elevation"
    });
 
@@ -17,7 +18,7 @@
    });
  });
 
- function _pais(evt){
+ var _pais = function (evt){
     require(["esri/geometry/ScreenPoint"], function(ScreenPoint){
         var sp = new ScreenPoint({
             x: evt.x+14,
@@ -31,4 +32,13 @@
             }
         }
     });
+}
+
+var _initCursor = function (max,delay) {
+    LeapManager.init({
+      interactiveSelector:"a",
+      maxCursors:max
+    });
+    LeapManager.cursorConfig.clickDelay = delay;
+    console.log("Cursor Iniciado")
 }

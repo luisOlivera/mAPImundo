@@ -93,7 +93,7 @@ function mostrarInfo(evt){
 function initCursor(){
     LeapManager.init({
       interactiveSelector:"a",
-      maxCursors:1});
+      maxCursors:0});
     LeapManager.cursorConfig.clickDelay = 3000;
     console.log("Cursor Iniciado")
 }
