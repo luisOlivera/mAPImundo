@@ -1,12 +1,11 @@
-var texto = "Bienvenido a la leccion 2, ahora aprenderemos nuevas formas de representar el espacio geográfico." 
- + "Veamos los tipos en que se representa el espacio geográfico."+"    Da click sobre iniciar" ;
+var texto = "Bienvenido a la leccion 2, ahora aprenderemos nuevas formas de representar el espacio geográfico. Veamos los tipos en que se representa el espacio geográfico."+"    Da click sobre iniciar" ;
 var texto2 = "Presta mucha atencion "
-var continentalText = "En el planisferio y en los mapas continentales, se representa reducida la extensión territorial de los países.y se muestra un continente completo  como:  ";
+var continentalText = "En el planisferio y en los mapas continentales, se representa reducida la extensión territorial de los países. y se muestra un continente completo  como:  "+" América, "+"  Africa, " +" Asia, "+" Oseanía, "+ " Europa ";
 var nacionalText = "En un mapa territorial o nacional, como  el de México , la porción terrestre mostrada corresponde a cada país. y los estados en los que se divide ";
 var estatalText = "Un mapa estatal muestra un estado o regíon perteneciente a pais ";
 var municipalText = "Un mapa municipal muestra las regiones en que se divide un estado  ";
 var personajeName= "Paco";
-var ayudaOli = "Ayuda a "+personajeName+" a llegar a su escuela tienes que indicarle donde esta su escuela";
+var ayudaOli = "Ayuda a "+personajeName+" a llegar a su escuela tienes que indicarle donde esta su escuela ";
 var instrucion="";
 var puntuacion=0;
 var intentos=0;
@@ -76,7 +75,7 @@ var map;
    });
      if(!banderaFin){
          responsive.iniciar();
-     responsive.leer(texto);  
+         responsive.leer(texto);  
          var div = document.getElementById("texto");
          var con = document.createElement("div");
          con.innerHTML= ' <button type="submit" id="continental" onclick="continental();">Iniciar </button>';
@@ -128,10 +127,11 @@ var map;
 
 
 var continental = function(){
-    responsive.iniciar(); 
+    responsive.iniciar( ); 
+   
   responsive.leer(continentalText);
-    
-      responsiveVoice.speech_onend = function(){
+     dinamica();
+     /* responsiveVoice.onend  = function(){
           responsive.iniciar(); 
           responsive.leer("America");
           //a qui gira
@@ -163,7 +163,7 @@ var continental = function(){
 		};  };	}; }; };
     
  
-    
+    */
     
     
   
@@ -174,13 +174,13 @@ var continental = function(){
 var nacional = function(){
     responsive.iniciar(); 
   responsive.leer(nacionalText);
-       responsiveVoice.speech_onend = function(){
+      // responsiveVoice.speech_onend = function(){
       
             responsive.iniciar(); 
-             instrucion="Bien indicale en el siguiente mapa donde se ecuentra su estado";
+             instrucion="Bien indicale en el siguiente mapa donde se ecuentra su estado ";
              responsive.leer(instrucion);
            puntuacion=puntuacion+1;
-       }
+       //}
   
   
 }
@@ -204,19 +204,20 @@ var municipal = function(){
 var dinamica = function(){
     
       
-        responsiveVoice.speech_onend = function(){
+        //responsiveVoice.speech_onend = function(){
                 pasouno();
             responsive.iniciar();  
-             responsive.leer("ahora puedes ayudar a"+personajeName+" a llegar a su escuela");
-              responsiveVoice.speech_onend = function(){
+             responsive.leer("ahora puedes ayudar a "+personajeName+" a llegar a su escuela");
+            //  responsiveVoice.speech_onend = function(){
             responsive.iniciar();  
                   instrucion="Indicale en el mapa continental en donde se encuentra el pais de " + personajeName;
              responsive.leer(instrucion);
               
                banderaContinental = true;
        
-              }
-        }
+          
+              //}
+        //}
         
         
          
@@ -307,11 +308,8 @@ var dinamicaDirecion =function(pais){
 var responsive = (function(){	
 	var texto = "";
 
-	var iniciar = function(){
-		responsiveVoice.speech_onend = function(){
-			
-			
-		};
+	var iniciar = function(f){
+		
 
 		responsiveVoice.setDefaultVoice("Spanish Latin American Female");
 	}
@@ -380,27 +378,27 @@ var estado = function(results){
             puntuacion=puntuacion+1;
             intentos= intentos+1;
       
-      responsiveVoice.speech_onend = function(){
+      //responsiveVoice.speech_onend = function(){
          responsive.iniciar();
          responsive.leer(estatalText);
           
-         responsiveVoice.speech_onend = function(){
+        // responsiveVoice.speech_onend = function(){
            responsive.iniciar();
            responsive.leer(municipalText);
                map.setZoom(14);
                  var pos = {lat: 17.0599739, lng: -96.7065003};
              
-            responsiveVoice.speech_onend = function(){
+          //  responsiveVoice.speech_onend = function(){
                 
                       responsive.iniciar();
              instrucion=" Indicale en el mapa en donde se encuentra la escuela de " + personajeName;
              responsive.leer(instrucion);
               
                     
-                }
-          }
+            //    }
+          //}
          
-      }
+      //}
           map.setZoom(8);
         var pos = {lat: 17.0784045, lng: -96.7370172};
         map.setCenter(pos);
@@ -427,7 +425,7 @@ if(esc.long_name === "Instituto Tecnologico de Oaxaca")
      puntuacion=puntuacion+1;
     intentos= intentos+1;
    
-    puntuacionFinal= 10/(puntiacion / intentos);
+    puntuacionFinal= 10/(puntuacion/ intentos);
     
     var p= document.getElementById("puntuacion");
     p.innerHTML= "" +puntuacionFinal;

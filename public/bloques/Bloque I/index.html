@@ -3,80 +3,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Lecciones</title>
+	<link rel="stylesheet" href="../../assets/css/leapstrap/leapstrap.css">
 	<link rel="stylesheet" href="../../../assets/css/font-awesome/css/font-awesome.min.css">
-	<style>
-		body {
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-  overflow: hidden;
-  background-color: #34495e;
-  display: block;
-  align-items: center;
-}
-
-h1{
-	color: #FFFFFF;
-	font-size: 40px;
-}
-		.boton{
-			padding: 18px 100px;
-			font-size: 20px;
-			border-radius: 10px;
-			color: white;
-			background-color: #1BD7B1;
-    		border: 2px solid #1BD7B1;
-			-webkit-transition-duration: 0.4s; /* Safari */
-    		transition-duration: 0.4s;
-    		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    		font-weight: bold;
-		}
-
-		.boton i{
-			padding: 10px;
-			margin-right: 5px;
-			background-color: rgba(0,0,0,0.19);
-			border-radius: 50%;
-		}
-		.boton:hover{
-			background-color: white;
-    		color: #1BD7B1;
-    		border: 2px solid #1BD7B1;
-		}
-		#home{
-  position: absolute;
-  top: 90%;
-  left: 49%;
-  color: #FFFFFF;
-  font-size: 50px;
-  text-decoration: none;
-}
-
-#home:hover{
-  color: #00DAC8;
-}
-
-#home.hover{
-  color: #00DAC8;
-}
-
-	</style>
+	<script src="../../assets/js/librerias/jquery-3.1.1.js"></script>
+	<script src="../../assets/js/librerias/leap-0.6.4.js"></script>
+  	<script src="../../assets/js/librerias/leapstrap.js"></script> 
+	<link rel="stylesheet" href="css/leccion.css">
 </head>
 <body>
-<h1>Lecciones</h1><br>
-	<a class="boton">
+	<h1>Lecciones</h1><br>
+	<a  href="lecciones/leccion 1/bloque1.html" class="boton leap-interactive" >
 	<i class="fa fa-unlock-alt" aria-hidden="true"></i>
 	 Leccion 1</a>	<br><br><br><br>
-	 <a class="boton">
+	 <a href="lecciones/leccion 2/leccionII/index.html" class="boton leap-interactive">
 	<i class="fa fa-lock" aria-hidden="true"></i>
 	 Leccion 2</a>	<br><br><br><br>
-	 <a class="boton">
+	 <a href="lecciones/Leccion 3/Leccion III/leccionIII.html" class="boton leap-interactive">
 	<i class="fa fa-lock" aria-hidden="true"></i>
 	 Leccion 3</a> <br><br><br><br>
-	 <a class="boton">
+	 <a href="lecciones/LeccionI 4/leccion4.html" class="boton leap-interactive">
 	<i class="fa fa-lock" aria-hidden="true"></i>
 	 Leccion 4</a>	
 	 <a href="../../../indice.html">
       <i id="home" class="fa fa-chevron-circle-left" aria-hidden="true"></i>
      </a> 
+     <script>
+		LeapManager.init({
+      		interactiveSelector:"a",
+      		maxCursors:1});
+   		LeapManager.cursorConfig.clickDelay = 3000;
+    	console.log("Cursor Iniciado")
+	</script>
 </body>
 </html>

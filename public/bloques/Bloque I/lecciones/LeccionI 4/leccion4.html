@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Leccion 4</title>
 	<link rel="icon" href="img/icon.ico">
+    <link rel="stylesheet" href="../../../../assets/css/leapstrap/leapstrap.css">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
 	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
@@ -19,6 +20,9 @@
     <script src="js/satelite.js"></script>
     <script src="js/drone.js"></script>
 	<script src="js/funciones.js"></script>
+    <script src="../../../../assets/js/librerias/leap-0.6.4.js"></script>
+    <script src="../../../../assets/js/librerias/leapstrap.js"></script> 
+    <script src="../../../../assets/js/mapi-leap.js"></script> 
 </head>
 <body onload="getObjetivo();">
 	<ul class="topnav" id="mytopnav">
@@ -31,13 +35,13 @@
 	<div id="myNav" class="overlay">
   		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   		<div class="overlay-content">
-    		<a href="#"><i class="fa fa-list" aria-hidden="true"></i> Leccion</a>
-    		<a href="../../menu.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
-    		<a href="../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
+    		<a href="../../index.html"><i class="fa fa-list" aria-hidden="true"></i> Leccion</a>
+    		<a href="../../../../indice.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
+    		<a href="../../../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
  		 </div>
 	</div>
 	<div id="app">
-		<div id="viewDiv"></div>
+		<div id="viewDiv" class="leap-interactive"></div>
 	    <div id="informacion">
 	    	<h1 align="center" id="pais">Bienvenido</h1>
 	    	<div id="texto">
@@ -56,11 +60,11 @@
                                 <td style="text-align: center;"><h4>Satélite</h4></td>
                             </tr>
                             <tr>
-                                <td><a href="#" onclick="getAvion();">
-                        <img title="Fotografía aérea" src="img/avion.png" width="150" height="150">
+                                <td><a href="#" onclick="getAvion();" class="leap-interactive">
+                        <img title="Fotografía aérea" src="img/avion.png" width="150" height="150" class="leap-interactive">
                     </a></td>       
-                                <td><a href="#" onclick="getSatelite();">
-                        <img title="Imagen satelital" src="img/satelite.png" width="150" height="150">
+                                <td><a href="#" onclick="getSatelite();" class="leap-interactive">
+                        <img title="Imagen satelital" src="img/satelite.png" width="150" height="150" class="leap-interactive">
                     </a></td>
                             </tr>
                             <tr></tr>
@@ -93,10 +97,18 @@
                     </table>                    
                     
                     <br>
-                    <button id="btnSiguiente" onclick="getDinamica();">Jugar</button>
+                    <button id="btnSiguiente" onclick="getDinamica();" class="leap-interactive">Jugar</button>
                 </center>
 	    	</div>
 	    </div>
 	</div>
+    <script>
+    LeapManager.init({
+      interactiveSelector:"a",
+      maxCursors:1});
+    LeapManager.cursorConfig.clickDelay = 3000;
+    console.log("Cursor Iniciado")
+  </script>
+
     </body>
 </html>

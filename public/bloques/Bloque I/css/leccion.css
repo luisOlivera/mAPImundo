@@ -37,12 +37,14 @@ h1{
 	background-color: white;
     color: #1BD7B1;
     border: 2px solid #1BD7B1;
+    text-decoration: none;
 }
 
 .boton.hover{
 	background-color: white;
     color: #1BD7B1;
     border: 2px solid #1BD7B1;
+    text-decoration: none;
 }
 
 #home{

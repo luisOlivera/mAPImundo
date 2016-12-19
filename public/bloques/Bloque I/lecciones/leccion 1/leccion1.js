@@ -15,11 +15,29 @@ var informacion_Europa;
 var informacion_Asia;
 var informacion_Oceania;
 var pregun=[];
+var lat,lng;
+
+ var _pais = function (evt){
+    require(["esri/geometry/ScreenPoint"], function(ScreenPoint){
+        var sp = new ScreenPoint({
+            x: evt.x+14,
+            y: evt.y-42
+        });
+        var punto = view.toMap(sp);
+        if (punto) {
+            if(punto.latitude && punto.longitude){
+                lat = punto.latitude;
+                lng = punto.longitude;   
+            }
+        }
+    });
+}
+
 
 var clickMap = function (evt) {
     _pais(evt);
     nombre_corto = regresaNombreCorto(lat, lng);
-  
+    console.log(nombre_corto);
 if(nombre_corto != undefined){
        var conti = regresaContinente(nombre_corto);
         view.popup.open({
@@ -53,7 +71,7 @@ $(document).ready(function(){
   $("#listo").show();
   getWikipedia();
 
-  $("#texto").text("Hola bienvenido a esta leccion, interectua con mAPImundo y descrube nuevas cosas acerca de los continentes. Presta mucha atencion a todo ya que lo necesitaras para pasar al siguiente nivel");
+  $("#texto").text("Hola bienvenido a esta leccion, interectua con mAPImundo y descubre nuevas cosas acerca de los continentes. Presta mucha atencion a todo ya que lo necesitaras para pasar al siguiente nivel");
 
   require([
     "esri/tasks/Locator",
@@ -87,8 +105,6 @@ $(document).ready(function(){
   {
     hablar("Hola bienvenido esta es tu primera lección, interactúa con mApiMundo y descubre nuevas cosas acerca de los continentes. Presta mucha atención a todo ya que lo necesitaras para pasar al siguiente nivel");
   }, 7000);
-
-
 
 
     view.on("click", function(evt) {
@@ -150,6 +166,22 @@ if(nombre_corto != undefined){
       $('#imagen').append("<center><img src='radar.png' height='325' width='325' class='animated infinite flash'></center>");
       $("#texto").text("AQUI VAMOS!! Ubica y selecciona al continente Americano");
       hablar("AQUI VAMOS!! Ubica y selecciona al continente Americano");
+
+      clickMap=function(evt){
+        _pais(evt);
+        var nombre_corto = regresaNombreCorto(lat, lng);
+  
+console.log("regreso el nombre corto" + nombre_corto);
+       var conti = regresaContinente(nombre_corto);
+       console.log("Regreso el continente " + conti);
+
+        if (evt.mapPoint) {
+          //var valor = regresaContinente(evt);
+              evalua(conti);
+        }
+      }
+      
+
       view.on("click", function(evt) {
         var lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;
     		var lon = Math.round(evt.mapPoint.longitude * 1000) / 1000;
@@ -207,6 +239,20 @@ var arreglo = pedirInformacion();
   //$("#siguiente").show();
   preguntas(arreglo);
   var contador = 0;
+/*
+  clickMap=function(evt){
+        _pais(evt);
+        var nombre_corto = regresaNombreCorto(lat, lng);
+
+       var conti = regresaContinente(nombre_corto);
+ 
+    //var valor = regresaContinente(evt);
+    if(conti !== "nada"){
+    evaluarRespuesta(conti,arreglo, contador);
+    contador++;
+    }
+      }
+*/
   view.on("click", function(evt) {
     if (evt.mapPoint) {
       var lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;
@@ -281,13 +327,13 @@ var preguntas = function(arreglo){
     }
   }
   if(repetido === false){
-    //console.log("Se agrego el num " + numero);
+    console.log("Se agrego el num " + numero);
     pregun.push(numero);
   $("#texto").text(arreglo[numero].descripcion);
   hablar(arreglo[numero].descripcion);
   $("#texto").attr("continente", arreglo[numero].continente);
   }else{
-    //console.log("Se repitio el numero: "+ numero + " Se va a crear otra pregunta");
+    console.log("Se repitio el numero: "+ numero + " Se va a crear otra pregunta");
     preguntas(arreglo);
   }
 };
@@ -428,6 +474,8 @@ var regresaContinente = function(pais){
     return "Asia";
   }else if(pais === "AT"){
     return "Europa";
+  }else if(pais==="MX"){
+    return "America";
   }else{
     var contin =  informacionPais(pais);
     if(contin === "Europe & Central Asia" ){
@@ -495,9 +543,10 @@ $.ajax({
   type: 'GET',
   async: false,  
      success: function(data, status, jqXHR) {
+      console.log(data);
        valor = data["wb:countries"]["wb:country"][0]["wb:region"][0]["_"];
 
-          console.log(data);
+          
   },
   error: function() {
     console.log( "Ha ocurrido un error" );
