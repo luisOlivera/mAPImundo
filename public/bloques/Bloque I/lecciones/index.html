@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Lecciones</title>
+	<link rel="stylesheet" href="../../../assets/css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/leccion.css">
+</head>
+<body>
+	<h1>Lecciones</h1><br>
+	<a  href="leccion 1/bloque1.html" class="boton leap-interactive" >
+	<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+	 Leccion 1</a>	<br><br><br><br>
+	 <a class="boton leap-interactive">
+	<i class="fa fa-lock" aria-hidden="true"></i>
+	 Leccion 2</a>	<br><br><br><br>
+	 <a class="boton leap-interactive">
+	<i class="fa fa-lock" aria-hidden="true"></i>
+	 Leccion 3</a> <br><br><br><br>
+	 <a class="boton leap-interactive">
+	<i class="fa fa-lock" aria-hidden="true"></i>
+	 Leccion 4</a>	
+	 <a href="../../../indice.html">
+      <i id="home" class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+     </a> 
+     <script>
+		LeapManager.init({
+      		interactiveSelector:"a",
+      		maxCursors:0});
+   		LeapManager.cursorConfig.clickDelay = 3000;
+    	console.log("Cursor Iniciado")
+	</script>
+</body>
+</html>

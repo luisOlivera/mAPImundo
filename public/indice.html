@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>mAPImundo</title>
+  <link rel="icon" href="assets/img/icon.ico">
+  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+	<link rel="stylesheet" href="assets/css/indice.css">
+  <script src="assets/js/librerias/jquery-3.1.1.js"></script>
+  <script src="assets/js/indice.js"></script>
+</head>
+<body onload="loader()">
+  <div id="loader">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+    <p id="cargando">Cargando</p>
+  </div>
+  <div id="indice" style="display:none;" class="animate-bottom">
+    <h2 id="usuario"></h2>
+    <h1 id="titulo">INDICE</h1>
+    <header>
+      <a href="bloques/Bloque I/index.html">    
+        <div class="contenedor leap-interactive" id="uno">
+          <div class="icon">Bloque I</div>
+          <p class="texto">El estudio de la tierra</p>
+        </div>
+      </a>
+      <a href="bloques/Bloque II/bloqueII.html">
+        <div class="contenedor leap-interactive" id="dos">
+          <div class="icon">Bloque II</div>
+          <p class="texto"> La naturaleza y el desarrollo sustentable</p>
+        </div>
+      </a>
+      <a href="#">
+        <div class="contenedor leap-interactive" id="tres">
+          <div class="icon">Bloque III</div>
+          <p class="texto">La población mundial y su diversidad</p>
+        </div>
+      </a>
+      <a href="#">
+        <div class="contenedor leap-interactive" id="cuatro">
+          <div class="icon">Bloque IV</div>
+          <p class="texto">La economia mundial</p>
+        </div>
+      </a>
+      <a href="#">
+        <div class="contenedor leap-interactive" id="cinco">
+          <div class="icon">Bloque V</div>
+          <p class="texto">Retos locales en el contexto mundial</p>
+        </div>
+      </a>
+    </header> 
+    <a href="index.html">
+      <i id="home" class="fa fa-home leap-interactive" aria-hidden="true"></i>
+    </a> 
+  </div>
+  <div id="login" style="display:none;" class="modal">
+    <form class="modal-content animate">
+      <div class="imgcontainer">
+        <img src="assets/img/login2.png" alt="Avatar" class="avatar">
+      </div>
+      <div class="container">
+        <label><b>¿Cuál es tu nombre?</b></label>
+        <input type="text" placeholder="Ingresa tu nombre" id="nombre" required>
+        <button class="leap-interactive" id="aceptar" onclick="nombreValido()">Aceptar</button>
+      </div>
+    </form>
+    <p id="ayuda" class="animate ">
+      Puedes decir tu nombre hasta que sea el correcto.
+    </p>
+  </div>
+</body>
+</html>

@@ -5,11 +5,11 @@ var mAPIServer = express();
 
 mAPIServer.use(express.static('public'));
 
-function startmAPIServer(){
+function startmAPIserver(){
 	mAPIServer.listen(config.express.port);
 	console.log('%s escuchando en el puerto: %s',
 		config.express.name,
 		config.express.port);
 }
 
-startmAPIServer();
+startmAPIserver();

@@ -1,3 +1,3 @@
 # mAPImundo
 
-Plataforma interactiva para el aprendizaje de geografía y cultura mundial.
+Plataforma interactiva para el aprendizaje de Geografía y Cultura Mundial.

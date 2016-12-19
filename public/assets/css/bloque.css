@@ -1,0 +1,226 @@
+@import 'font-awesome/css/font-awesome.min.css';
+@import 'leapstrap/leapstrap.css';
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', serif;
+    background: #000000;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
+}
+
+#menu {
+    display: inline-block;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    cursor: pointer;
+    float: left;
+}
+
+#menu:hover {
+    background-color: #555;
+}
+
+#leccion{
+    color: #FFFFFF;
+    font-size: 17px;
+    padding: 14px 16px;
+    float: left;
+}
+
+#titulo{
+    color: #08E9F8;
+    font-size: 20px;
+    padding: 12px 16px;
+    float: left;
+}
+
+#pLeccion{
+    color: #F0B500;
+    font-size: 20px;
+    padding: 12px 16px;
+    float: left;
+}
+
+#puntosLeccion{
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 12px 16px;
+    float: left;
+}
+
+#pBloque{
+    color: #F0B500;
+    font-size: 20px;
+    padding: 12px 16px;
+    float: right;
+}
+
+#puntosBloque{
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 12px 16px;
+    float: right;
+}
+
+#user{
+    color: #FFFFFF;
+    font-size: 17px;
+    padding: 12px 16px;
+    float: right;
+    cursor: pointer;
+}
+
+#user:hover {
+    background-color: #555;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.8);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+#app{
+    width: 100%;
+    height: 92%;
+}
+
+#viewDiv{
+    width: 70%;
+    height: 100%;
+}
+
+#informacion{
+    width: 30%;
+    height:  92%;
+    background-color: #252525;
+    position: absolute;
+    top:52px;
+    left: 70%;
+    color: #FFFFFF;
+}
+
+#pais{
+    color: #00C4E1;
+    font-size: 2em;
+}
+
+#texto{
+    background-color: #202020;
+    width: 100%;
+    height: 80%;
+    margin: 0;
+    overflow-y: auto;
+    color: #FFFFFF;
+    text-align: justify;
+}
+
+#texto::-webkit-scrollbar{
+width:10px;
+background-color:#313131;
+border-radius:10px;
+} 
+
+#texto::-webkit-scrollbar-thumb{
+background-color:#00B9D4;
+border-radius:10px;
+}
+#texto::-webkit-scrollbar-thumb:hover{
+background-color:#00D9DC;
+border:1px solid #333333;
+}
+#texto::-webkit-scrollbar-thumb:active{
+background-color:#0063A9;
+border:1px solid #333333;
+} 
+
+.leap-pointable-cursor {
+  border: 3px solid #FF5A00;
+  box-shadow: 0 0 10px #F22E00;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  background-color: rgba(255, 255,255,0.6);
+  border-right: 3px solid rgba(0, 0, 0, 0);
+  border-left: 3px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.leap-pointable-cursor:after {
+  border: 2px solid #FF5A00;
+  box-shadow: 0 0 10px #F22E00;
+  position: absolute;
+  top: 32%;
+  left: 30%;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0);
+  border-right: 2px solid rgba(0, 0, 0, 0);
+  border-left: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  content: "";
+  opacity: .9;
+}

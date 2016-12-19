@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Leccion 4</title>
+	<link rel="icon" href="img/icon.ico">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+	<link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
+    <script type="text/javascript" src="https://threejs.org/build/three.js"></script>
+    <script src="js/librerias/jquery-3.1.1.js"></script>
+    <script src="js/init.js" type="text/javascript"></script>
+    <script src="js/OBJLoader.js"></script>
+	<script src="js/leccion4.js"></script>
+    <script src="js/html2canvas.js"></script>
+    <script src="js/avion.js"></script>
+    <script src="js/satelite.js"></script>
+    <script src="js/drone.js"></script>
+	<script src="js/funciones.js"></script>
+</head>
+<body onload="getObjetivo();">
+	<ul class="topnav" id="mytopnav">
+  		<li id="menu" onclick="openNav()">&#9776;</li>
+  		<li id="leccion">Leccion 4</li>
+  		<li id="titulo">Nuevas formas de ver los espacios geográficos</li>
+        <li id="puntos">0</li>
+  		<li id="user"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Usuario</li>
+	</ul>
+	<div id="myNav" class="overlay">
+  		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  		<div class="overlay-content">
+    		<a href="#"><i class="fa fa-list" aria-hidden="true"></i> Leccion</a>
+    		<a href="../../menu.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
+    		<a href="../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
+ 		 </div>
+	</div>
+	<div id="app">
+		<div id="viewDiv"></div>
+	    <div id="informacion">
+	    	<h1 align="center" id="pais">Bienvenido</h1>
+	    	<div id="texto">
+	    	<h3 id="info" style="text-align: center;">
+	    		Con el estudio de esta lección, distinguirás las características y la utilidad de las fotografías aéreas e imágenes satelitales.
+	    	</h3>
+                <br/>
+                <center>
+                <img style="display: none;" id="imagen" src="" width="300" height="300">
+                    </center>
+                <center>
+                    <table id="tblMedios" style="display: none;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;"><h4>Avión</h4></td>
+                                <td style="text-align: center;"><h4>Satélite</h4></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" onclick="getAvion();">
+                        <img title="Fotografía aérea" src="img/avion.png" width="150" height="150">
+                    </a></td>       
+                                <td><a href="#" onclick="getSatelite();">
+                        <img title="Imagen satelital" src="img/satelite.png" width="150" height="150">
+                    </a></td>
+                            </tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr><td style="text-align: center; font-size: 14px;" colspan="2">Pista: Si quieres ver el mapa con los nombres de los países has click en el pequeño recuadro situado en la esquina inferior izquierda.</td> </tr>
+                        </tbody>
+                    </table>                    
+                </center>
+                
+                <center>
+                    <table id="tabla">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;"><h4>Fotografía aérea</h4></td>
+                                <td style="text-align: center;"><h4>Imagen satelital</h4></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" onclick="getFotografia();">
+                        <img title="Fotografía aérea" src="img/aerea.jpg" width="150" height="150">
+                    </a></td>       
+                                <td><a href="#" onclick="getImagen();">
+                        <img title="Imagen satelital" src="img/satelital.jpg" width="150" height="150">
+                    </a></td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                    
+                    <br>
+                    <button id="btnSiguiente" onclick="getDinamica();">Jugar</button>
+                </center>
+	    	</div>
+	    </div>
+	</div>
+    </body>
+</html>

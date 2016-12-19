@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Bloque I</title>
+	<link rel="icon" href="../../../assets/img/icon.ico">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+	<link rel="stylesheet" href="../../../assets/css/leapstrap.css">
+	<link rel="stylesheet" href="../../../assets/css/font-awesome/css/font-awesome.min.css">
+	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+	<script src="../../../assets/js/librerias/jquery-3.1.1.js"></script>
+	<script src="../../../assets/js/librerias/leap-0.6.4.js"></script>
+	<script src="../../../assets/js/librerias/leapstrap.js"></script>  
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+  	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+  	<script src="js/apiResponsive.js"> </script>
+  	<script src="js/apiGoogleMaps.js"> </script>
+  	<script src="js/funciones.js"> </script>
+  	<script src="js/apiSpeechRecognition.js"> </script>
+  	<script src="js/procesar.js"> </script>
+
+</head>
+<body>
+	<ul class="topnav" id="mytopnav">
+		<li id="menu" onclick="openNav()">&#9776;</li>
+		<li id="leccion">Leccion III</li>
+		<li id="titulo">Los planos y sus elementos</li>
+		<li id="user"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Usuario</li>
+	</ul>
+	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="overlay-content">
+			<a href="#"><i class="fa fa-list" aria-hidden="true"></i> Leccion</a>
+			<a href="../../menu.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
+			<a href="../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
+		</div>
+	</div>
+	<div id="app">
+		<div id="map" class="leap-interactive"></div>
+		<div id="informacion">
+			<div id="texto">
+				Los planos son la representación de una ciudad vista desde arriba,como si volaras sobre ella. Desde esa perspectiva se puede observar
+      			el trazado de las calles y las manzanas, así como algunos lugares de
+      			interés, monumentos, construcciones de valor artístico y museos.
+			</div>
+			<p></p>
+			<div id="imagenes">
+				<center>
+				<img src="imagenes/simbologia.png" align="center" ="center" style="width:80%" onclick="funciones.openModal();funciones.currentSlide(1)" class="hover-shadow cursor">
+				</center>
+				<div id="myModal" class="modal">
+					<span class="close cursor" onclick="funciones.closeModal()">&times;</span>
+					<div class="modal-content">
+						<div class="mySlides">
+							<img src="imagenes/simbologia.png" style="width:100%">
+						</div>
+					</div>
+				</div>
+			</div> 
+			<p></p>
+			<center>
+			<input type="button" value="Iniciar" onclick="procesar.procesar('INICIAR')">
+			</center>
+			<p id="instrucciones" style="color: #fff"></p>
+      		<p id="intentos" style="color: #fff"></p>
+      		<p id="atinados" style="color: #fff"></p>
+      		<p id= "puntos" style="color: #fff"></p>
+		</div>
+	</div>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBRlScymyRJ8e6MHdY4a_uU7l_-4UAtXo&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>
