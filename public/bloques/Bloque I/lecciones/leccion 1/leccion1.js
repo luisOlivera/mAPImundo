@@ -16,6 +16,7 @@ var informacion_Asia;
 var informacion_Oceania;
 var pregun=[];
 var lat,lng;
+var calificacion;
 
  var _pais = function (evt){
     require(["esri/geometry/ScreenPoint"], function(ScreenPoint){
@@ -107,6 +108,41 @@ $(document).ready(function(){
   }, 7000);
 
 
+  var clickMap = function (evt) {
+    if(comenzo === false){
+    _pais(evt);
+    nombre_corto = regresaNombreCorto(lat, lng);
+    console.log(nombre_corto);
+
+if(nombre_corto != undefined){
+       var conti = regresaContinente(nombre_corto);
+        view.popup.open({
+          title: "Continente: "+ conti,
+          location: evt.mapPoint
+        });
+        if(conti === "America"){
+          $("#texto").text(informacion_America.cadena.split(".")[0] +". " + informacion_America.cadena.split(".")[1]+ ". " + informacion_America.cadena.split(".")[2]+ ". " + informacion_America.cadena.split(".")[3]+". " + informacion_America.cadena.split(".")[4]+ ". " + informacion_America.cadena.split(".")[5]  +". ");
+          _getVideo("2_4G73UIZFo");
+        }else if(conti === "Africa"){
+           $("#texto").text(informacion_Africa.cadena.split(".")[0] +". " + informacion_Africa.cadena.split(".")[1]+ ". " + informacion_Africa.cadena.split(".")[2]+ ". " + informacion_Africa.cadena.split(".")[3]+". " + informacion_Africa.cadena.split(".")[4]+ ". " + informacion_Africa.cadena.split(".")[5]  +". ");
+           _getVideo("ktgUMIcRp0c");
+          
+        }else if(conti === "Europa"){
+          $("#texto").text(informacion_Europa.cadena.split(".")[0] +". " + informacion_Europa.cadena.split(".")[1]+ ". " + informacion_Europa.cadena.split(".")[2]+ ". " + informacion_Europa.cadena.split(".")[3]+". " + informacion_Europa.cadena.split(".")[4]+ ". " + informacion_Europa.cadena.split(".")[5]  +". ");
+          _getVideo("-_7_exajlEs");
+        }else if(conti === "Oceania"){
+          $("#texto").text(informacion_Oceania.cadena.split(".")[0] +". " + informacion_Oceania.cadena.split(".")[1]+ ". " + informacion_Oceania.cadena.split(".")[2]+ ". " + informacion_Oceania.cadena.split(".")[3]+". " + informacion_Oceania.cadena.split(".")[4]+ ". " + informacion_Oceania.cadena.split(".")[6] +".");
+          _getVideo("DJBd23NWa50");
+        }else if(conti === "Asia"){
+           $("#texto").text(informacion_Asia.cadena.split(".")[0] +". " + informacion_Asia.cadena.split(".")[1]+ ". " + informacion_Asia.cadena.split(".")[2]+ ". " + informacion_Asia.cadena.split(".")[3]+". " + informacion_Asia.cadena.split(".")[4]+ ". " + informacion_Asia.cadena.split(".")[5] +". " + informacion_Asia.cadena.split(".")[6] +". ");
+          _getVideo("_4S94ucWml4");
+        }      
+}
+}
+  }
+
+
+/*
     view.on("click", function(evt) {
       if(comenzo === false){
       if (evt.mapPoint) {
@@ -145,6 +181,7 @@ if(nombre_corto != undefined){
     }
     }
     });
+*/
 
   });
 
@@ -167,6 +204,7 @@ if(nombre_corto != undefined){
       $("#texto").text("AQUI VAMOS!! Ubica y selecciona al continente Americano");
       hablar("AQUI VAMOS!! Ubica y selecciona al continente Americano");
 
+
       clickMap = function(evt){
         _pais(evt);
         var nombre_corto = regresaNombreCorto(lat, lng);
@@ -179,8 +217,8 @@ console.log("regreso el nombre corto" + nombre_corto);
               evalua(conti);
         
       }
-      
-
+  
+/*
       view.on("click", function(evt) {
         var lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;
     		var lon = Math.round(evt.mapPoint.longitude * 1000) / 1000;
@@ -195,6 +233,7 @@ console.log("regreso el nombre corto" + nombre_corto);
               evalua(conti);
         }
       });
+*/
     }else if(termino === true && termino2 === false){
         //getWikipedia();
       $("#texto").text("Ahora vamos a ver que tanto conoces y aprendiste de estos continentes. Lee (escucha) los siguientes textos y selecciona el continente del que se habla.");
@@ -203,11 +242,11 @@ console.log("regreso el nombre corto" + nombre_corto);
        $("#aceptar1").hide();
        $("#comenzar").show();
     }else if(termino === true && termino2 === true && termino3 === false){
-      var calificacion = (porcentaje_Conti + porcentaje_Pregun)/2
+      calificacion = (porcentaje_Conti + porcentaje_Pregun)/2
       //$("#texto").text("Tus resultados de esta leccion son los siguientes: \n Busca los continentes: " + porcentaje_Conti +
       //"\n Preguntas: " + porcentaje_Pregun);
       $("#texto").empty();
-      $("#informacion").html("<h3>Tus resultados de esta leccion son los siguientes:</h3><br/>"+
+      $("#imagen").html("<h3>Tus resultados de esta leccion son los siguientes:</h3><br/>"+
       "<h3>Ubicar a los continentes: " + porcentaje_Conti+ "</h3>"+
       "<h3>Preguntas sobre continentes: " + porcentaje_Pregun+ "</h3>"+
       "<h3>Calificacion final:" + calificacion+ "</h3>");
@@ -221,12 +260,13 @@ console.log("regreso el nombre corto" + nombre_corto);
       }else if(calificacion<6){
         hablar("Rayos! no has logrado pasar este nivel. Vulve a intentarlo con mas atencion.");
       }
-
-      
+     
       $("#aceptar1").html("Terminar");
+      $("#aceptar1").show();
       termino3= true;
     }else{
-    window.location="http://localhost:3000/";
+        ////////////////////
+        guardarCalificacion("leccion1","bloque1",calificacion);
   }
 });
 
@@ -252,6 +292,7 @@ var arreglo = pedirInformacion();
     }
       }
 
+/*
   view.on("click", function(evt) {
     if (evt.mapPoint) {
       var lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;
@@ -267,6 +308,8 @@ var arreglo = pedirInformacion();
     }
   }
   });
+*/
+
 
 });
 
@@ -577,4 +620,20 @@ var url='https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+
     }
 	});
 return valor;
+}
+
+
+var guardarCalificacion = function(leccion, bloque, calif){
+  var user = localStorage.usuario;
+
+  $.ajax({
+        type: "PUT",
+        url: "//localhost:3000/userUpdate",
+        async:false,
+		data: {user: user, puntaje: calif, bloque: bloque, leccion:leccion},
+        success: function(data){
+          console.log(data);
+           window.location="http://localhost:3000/indice.html";
+        }
+        });
 }
