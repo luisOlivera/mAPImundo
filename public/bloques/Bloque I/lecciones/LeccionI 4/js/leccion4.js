@@ -14,10 +14,7 @@ var keyBing = '055acde1923a4d5cb3b8e9ffb8d00115';
 
 //Objetivo de la leccion de texto a voz
 function getObjetivo(){
-    responsiveVoice.setDefaultVoice("Spanish Latin American Female");
-    responsiveVoice.speak("Esta es la ultima lección del bloque 1.");
-    responsiveVoice.speak("Descubrirás otros recursos para obtener información geográfica.");   
-    responsiveVoice.speak("Podrás distinguir las características y utilidad de las fotografías aéreas e imágenes satelitales,  da click en el botón jugar cuándo estés listo.");
+    hablar("Esta es la ultima lección del bloque 1. Descubrirás otros recursos para obtener información geográfica. Podrás distinguir las características y utilidad de las fotografías aéreas e imágenes satelitales,  da click en el botón jugar cuándo estés listo.");
 }
 
 //Muestra una fotografía aérea
@@ -36,38 +33,44 @@ function getImagen(){
     document.getElementById("imagen").src = imagen.url;
 }
 
+//Texto a voz
+function hablar(texto, f){
+    responsiveVoice.speak(texto,"Spanish Latin American Female",{onend: f});
+}
+
 //Actividad a relizar
 function getDinamica(){
     document.getElementById("imagen").style.display = "none";
     document.getElementById("tabla").style.display = "none";
     document.getElementById("tblMedios").style.display = "inline";
+    document.getElementById("btnJugar").style.display = "none";
+    document.getElementById("pais").textContent = "Instrucciones";
     //Instrucciones de la dinámica
-    if(contador === 0){
-        view.ui.add(toggle, "bottom-left");
-        responsiveVoice.speak("Deberás conseguir una imagen satelital o una foto aérea de los siguientes países.");
-        responsiveVoice.speak("Selecciona el medio adecuado para obtener lo que se te pide.");
-        responsiveVoice.speak("Encuentra el lugar y acércate o aléjate lo necesario para conseguir el objetivo.");
-        responsiveVoice.speak("Asegúrate de haber seleccionado el tipo de mapa satelital.");
-        responsiveVoice.speak("Empezemos");
-    }
+    view.ui.add(toggle, "bottom-left");
+    document.getElementById("info").textContent = "Consigue una imagen satelital o una foto aérea de los siguientes países. Selecciona el avión o el satélite según corresponda y llévalo hasta el país solicitado. Acercáte o aléjate lo necesario para conseguir el objetivo.";
+    hablar("Deberás conseguir una imagen satelital o una foto aérea de los siguientes países. Selecciona el medio adecuado para obtener lo que se te pide. Encuentra el lugar y acércate o aléjate lo necesario para conseguir el objetivo. Empezemos", getEjercicio);
+}
+
+function getEjercicio(){
     //Finalizó dinámica
     if(contador >= 9 && puntos >= 7){
         document.getElementById("info").textContent = "Lección completada";
         document.getElementById("imagen").src = "http://wtfonline.mx/wp-content/uploads/2015/09/todo-bien.png";
-    }
+    }    
     //Siguiente ejercicio, otro país, diferente tipo de imagen (satelital o aérea)
     else{
         if(contador > 0){
-            responsiveVoice.speak("Continuemos.");
+            hablar("Continuemos.");
         }
         document.getElementById("pais").textContent = "¡Tómale foto!";
         tipoMapa = tiposMapa[Math.floor(Math.random() * 2)];
         pais = paises[Math.floor(Math.random() * paises.length)];
         document.getElementById("info").textContent = tipoMapa + " de " + pais;
-        responsiveVoice.speak(tipoMapa + " de "+pais);
+        hablar(tipoMapa+" de "+pais);
         document.getElementById("imagen").src = "";
-        document.getElementById("btnSiguiente").textContent = "Tomar foto";
-        document.getElementById("btnSiguiente").onclick = verificar;
+        document.getElementById("btnJugar").style.display = "inline";
+        document.getElementById("btnJugar").textContent = "Tomar foto";
+        document.getElementById("btnJugar").onclick = verificar;
     }
     contador++;
 }
@@ -88,7 +91,7 @@ function verificar(){
                 if(opcSatelite){
                     //Se considera imagen satelital
                     //cuando el zoom se encuentre en el siguiente rango
-                    if(view.zoom >= 3 && view.zoom <= 6){
+                    if(view.zoom >= 3 && view.zoom <= 8){
                         comprobarPais();
                     }else{
                         error();
@@ -96,8 +99,8 @@ function verificar(){
                 }
                 //En caso de que haya seleccionado el avión
                 else{
-                    responsiveVoice.speak("Los aviones no pueden capturar imágenes satelitales.");
-                    getDinamica();
+                    hablar("Los aviones no pueden capturar imágenes satelitales.");
+                    getEjercicio();
                 }
             }
             //Si el ejercicio se trata de obtener una fotografía aérea
@@ -106,7 +109,7 @@ function verificar(){
                 if(opcAvion){
                     //Se considera fotografía aérea
                     //cuando el zoom se encuentre en el siguiente rango
-                    if(view.zoom >= 13 && view.zoom <= 18){
+                    if(view.zoom >= 12 && view.zoom <= 18){
                         comprobarPais();               
                     }else{
                         error();
@@ -114,19 +117,19 @@ function verificar(){
                 }
                 //En caso de que haya seleccionado el satélite
                 else{
-                    responsiveVoice.speak("Los satélites no toman fotografías aéreas.");
-                    getDinamica();
+                    hablar("Los satélites no toman fotografías aéreas.");
+                    getEjercicio();
                 }
             }
         }
         //Cuando intenta tomar la imagen de un mapa con nombres de países
         else{
-            responsiveVoice.speak("¡El tipo de mapa no es el correcto! Cámbialo e intentalo otra vez.");
+            hablar("¡El tipo de mapa no es el correcto! Cámbialo e intentalo otra vez.");
         }
     }
     //Cuando no haya seleccionado algún objeto 3D (avión/satélite)
     else{
-        responsiveVoice.speak("Debes seleccionar el avión o el satélite.");
+        hablar("Debes seleccionar el avión o el satélite.");
     }
 }
 
@@ -217,8 +220,8 @@ function acierto(){
     puntos++;
     document.getElementById("puntos").textContent = puntos;
     document.getElementById("info").textContent = "¡Correcto!";
-    responsiveVoice.speak("¡Correcto!");
-    getDinamica();
+    hablar("¡Correcto!");
+    getEjercicio();
 }
 
 //Indica cuando se genere un error
@@ -228,8 +231,8 @@ function error(){
         causa = errores[Math.floor(Math.random() * errores.length-1)];
     }
     document.getElementById("info").textContent = causa;
-    responsiveVoice.speak(causa);
-    getDinamica();
+    hablar(causa);
+    getEjercicio();
 }
 
 //Tipos de errores
