@@ -22,6 +22,7 @@
   </div>
   <div id="indice" style="display:none;" class="animate-bottom">
     <h2 id="usuario"></h2>
+    <p id="sesion">Cerrar sesion</p>
     <h1 id="titulo">INDICE</h1>
     <header>
       <a href="bloques/Bloque I/index.html">    
@@ -66,13 +67,33 @@
       </div>
       <div class="container">
         <label><b>¿Cuál es tu nombre?</b></label>
-        <input type="text" placeholder="Ingresa tu nombre" id="nombre" required>
+        <input type="text" placeholder="Ingresa tu usuario" id="nombre" required>
+        <input type="password" placeholder="Ingresa tu contraseña" id="pass" required>
         <button class="leap-interactive" id="aceptar" onclick="nombreValido()">Aceptar</button>
       </div>
     </form>
     <p id="ayuda" class="animate ">
       Puedes decir tu nombre hasta que sea el correcto.
     </p>
+    <button class="leap-interactive" id="BotonRegistro" class="animate ">Presiona para registrarte</button>
   </div>
+
+ <div id="registrar" style="display:none;" class="modal">
+    <form class="modal-content animate">
+      <div class="imgcontainer">
+        <img src="assets/img/login2.png" alt="Avatar" class="avatar">
+      </div>
+      <div class="container">
+        <label><b>Ingresa tus datos</b></label>
+        <input type="text" placeholder="Ingresa tu nombre real" id="nom" required>
+        <input type="text" placeholder="Ingresa tu usuario" id="usu" required>
+        <input type="password" placeholder="Ingresa tu contraseña" id="contra" required>
+        
+      </div>
+    </form>
+    <button class="leap-interactive" id="registrar" onclick="registroValido()">Registrarse</button>
+     <button class="leap-interactive" id="regresar" class="animate ">Presiona para regresar</button>
+  </div>
+
 </body>
 </html>

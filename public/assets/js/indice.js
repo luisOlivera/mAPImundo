@@ -37,8 +37,72 @@ function showIndice() {
 		    }
 		}
 	}
+
+	$("#BotonRegistro").click(function(){
+		$("#login").hide();
+		var logi=document.getElementById('registrar');
+		logi.style.display='block'; 
+		logi.style.width="auto";
+		responsiveVoice.setDefaultVoice("Spanish Latin American Female");
+    	responsiveVoice.speak("Ingresa los siguientes datos amiguito");
+	});
+
+	
+	$("#regresar").click(function(){
+		showIndice();
+		$("#registrar").hide();
+	});
+
+	$("#sesion").click(function(){
+		localStorage.clear();
+		window.location="http://localhost:3000/";
+	});
 }
 
+
 function nombreValido(){
-	localStorage.usuario = document.getElementById("nombre").value;
+	 var user = $("#nombre").val();
+	var pass = $("#pass").val();
+	
+        $.ajax({
+        type: "POST",
+        url: "//localhost:3000/userFind",
+        async:false,
+		data: {user: user, password: pass},
+        success: function(data){
+          console.log(data);
+		  if(data.mensaje){
+		//alert(data.mensaje);
+    	responsiveVoice.speak("Usuario o contraseña incorrecta");
+		  }else{
+    	responsiveVoice.speak("Bienvenido");
+		localStorage.usuario = document.getElementById("nombre").value;
+		  }
+        }
+        });
+}
+
+function registroValido(){
+	responsiveVoice.setDefaultVoice("Spanish Latin American Female");
+    var nom = $("#nom").val();
+	var user = $("#usu").val();
+	var pass = $("#contra").val();
+
+        $.ajax({
+        type: "POST",
+        url: "//localhost:3000/users",
+        async:false,
+		data: {nombre: nom,user: user, password: pass},
+        success: function(data){
+          console.log(data);
+		  if(data.mensaje){
+		//alert(data.mensaje);
+    	responsiveVoice.speak("El nombre de usuario ya existe, ingresa otro usuario.");
+		  }else{
+    	responsiveVoice.speak("Has sido registrado con exito");
+		window.location="http://localhost:3000/indice.html";
+		  }
+        }
+        });
+
 }
