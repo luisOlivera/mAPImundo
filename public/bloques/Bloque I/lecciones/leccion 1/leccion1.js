@@ -167,7 +167,7 @@ if(nombre_corto != undefined){
       $("#texto").text("AQUI VAMOS!! Ubica y selecciona al continente Americano");
       hablar("AQUI VAMOS!! Ubica y selecciona al continente Americano");
 
-      clickMap=function(evt){
+      clickMap = function(evt){
         _pais(evt);
         var nombre_corto = regresaNombreCorto(lat, lng);
   
@@ -175,10 +175,9 @@ console.log("regreso el nombre corto" + nombre_corto);
        var conti = regresaContinente(nombre_corto);
        console.log("Regreso el continente " + conti);
 
-        if (evt.mapPoint) {
           //var valor = regresaContinente(evt);
               evalua(conti);
-        }
+        
       }
       
 
@@ -239,7 +238,7 @@ var arreglo = pedirInformacion();
   //$("#siguiente").show();
   preguntas(arreglo);
   var contador = 0;
-/*
+
   clickMap=function(evt){
         _pais(evt);
         var nombre_corto = regresaNombreCorto(lat, lng);
@@ -252,7 +251,7 @@ var arreglo = pedirInformacion();
     contador++;
     }
       }
-*/
+
   view.on("click", function(evt) {
     if (evt.mapPoint) {
       var lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;

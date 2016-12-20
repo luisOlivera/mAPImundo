@@ -1,0 +1,9 @@
+{
+ "name": "mapimundo",
+ "version": "2.0.0",
+ "dependencies": {
+ "mongoose": "~3.6.11",
+ "method-override": "^2.1.2",
+ "body-parser": "^1.5.1"
+ }
+}
