@@ -1,16 +1,18 @@
-var view;
+//Indican el mapa en 3D, tipo de imagen para cada ejercicio, nombre del país a buscar,
+//latitud y longitud de donde se colocó el avión o el satélite
+var view, tipoMapa, pais, lat, lon;
+//Indican que objeto 3D (avión/satélite) se seleccionó
 var opcAvion = false;
 var opcSatelite = false;
+//Almacena número de ejercicios, obligatorios = 10
 var contador = 0;
+//Almacena puntuación de la lección
 var puntos = 0;
+//Opciones de imagen para la dinámica
 var tiposMapa = ["Imagen satelital", "Fotografía aérea"];
-var tipoMapa, pais, lat, lon;
 var keyBing = '055acde1923a4d5cb3b8e9ffb8d00115';
 
-function zoom(){
-    console.log(view.zoom);
-}
-
+//Objetivo de la leccion de texto a voz
 function getObjetivo(){
     responsiveVoice.setDefaultVoice("Spanish Latin American Female");
     responsiveVoice.speak("Esta es la ultima lección del bloque 1.");
@@ -18,6 +20,7 @@ function getObjetivo(){
     responsiveVoice.speak("Podrás distinguir las características y utilidad de las fotografías aéreas e imágenes satelitales,  da click en el botón jugar cuándo estés listo.");
 }
 
+//Muestra una fotografía aérea
 function getFotografia(){
     document.getElementById("pais").textContent = fotografia.titulo;
     document.getElementById("info").textContent = fotografia.contenido;
@@ -25,6 +28,7 @@ function getFotografia(){
     document.getElementById("imagen").src = fotografia.url;
 }
 
+//Muestra una imagen satelital
 function getImagen(){
     document.getElementById("pais").textContent = imagen.titulo;
     document.getElementById("info").textContent = imagen.contenido;
@@ -32,10 +36,12 @@ function getImagen(){
     document.getElementById("imagen").src = imagen.url;
 }
 
+//Actividad a relizar
 function getDinamica(){
     document.getElementById("imagen").style.display = "none";
     document.getElementById("tabla").style.display = "none";
     document.getElementById("tblMedios").style.display = "inline";
+    //Instrucciones de la dinámica
     if(contador === 0){
         view.ui.add(toggle, "bottom-left");
         responsiveVoice.speak("Deberás conseguir una imagen satelital o una foto aérea de los siguientes países.");
@@ -44,10 +50,13 @@ function getDinamica(){
         responsiveVoice.speak("Asegúrate de haber seleccionado el tipo de mapa satelital.");
         responsiveVoice.speak("Empezemos");
     }
+    //Finalizó dinámica
     if(contador >= 9 && puntos >= 7){
         document.getElementById("info").textContent = "Lección completada";
         document.getElementById("imagen").src = "http://wtfonline.mx/wp-content/uploads/2015/09/todo-bien.png";
-    }else{
+    }
+    //Siguiente ejercicio, otro país, diferente tipo de imagen (satelital o aérea)
+    else{
         if(contador > 0){
             responsiveVoice.speak("Continuemos.");
         }
@@ -63,42 +72,65 @@ function getDinamica(){
     contador++;
 }
 
+//Califica cada ejercicio de la dinámica
 function verificar(){
+    //Debió haber seleccionado el avión o el satélite
     if(opcAvion || opcSatelite){
+        //Comprueba que el la base del mapa 3D sea satelital, que no tenga nombres de países
+        //para ambos casos, sea fotografía aérea o imagen satelital
         if(view.map.basemap.resourceInfo.id == "satellite"){
+            //Obtiene posición del medio (avión/satélite)
             lat = view.center.latitude;
             lon = view.center.longitude;    
+            //Si el ejercicio se trata de obtener una imagen satelital
             if(tipoMapa === "Imagen satelital"){
+                //Debió elegir el satélite
                 if(opcSatelite){
+                    //Se considera imagen satelital
+                    //cuando el zoom se encuentre en el siguiente rango
                     if(view.zoom >= 3 && view.zoom <= 6){
                         comprobarPais();
                     }else{
                         error();
                     }
-                }else{
+                }
+                //En caso de que haya seleccionado el avión
+                else{
                     responsiveVoice.speak("Los aviones no pueden capturar imágenes satelitales.");
                     getDinamica();
                 }
-            }else{
+            }
+            //Si el ejercicio se trata de obtener una fotografía aérea
+            else{
+                //Debió elegir el avión
                 if(opcAvion){
+                    //Se considera fotografía aérea
+                    //cuando el zoom se encuentre en el siguiente rango
                     if(view.zoom >= 13 && view.zoom <= 18){
                         comprobarPais();               
                     }else{
                         error();
                     }
-                }else{
+                }
+                //En caso de que haya seleccionado el satélite
+                else{
                     responsiveVoice.speak("Los satélites no toman fotografías aéreas.");
                     getDinamica();
                 }
             }
-        }else{
+        }
+        //Cuando intenta tomar la imagen de un mapa con nombres de países
+        else{
             responsiveVoice.speak("¡El tipo de mapa no es el correcto! Cámbialo e intentalo otra vez.");
         }
-    }else{
+    }
+    //Cuando no haya seleccionado algún objeto 3D (avión/satélite)
+    else{
         responsiveVoice.speak("Debes seleccionar el avión o el satélite.");
     }
 }
 
+//Comprueba que el objeto 3D esté sobre un país
 function comprobarPais(){
     $.ajax({
         url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+ '&key=AIzaSyA206wa_9HvHofUAhSDXZ_-XVZbERaNR64',
@@ -112,6 +144,7 @@ function comprobarPais(){
                     }                         
                 }
             }
+            //El obejto 3D está sobre el país solocitado
             if(paisMapeado == pais || pais.includes(paisMapeado)){
                acierto();
             }else{
@@ -121,23 +154,16 @@ function comprobarPais(){
     });
 }
 
-function capturar(){
-    html2canvas(document.body.children[2].children[0], {
-        useCORS: true,
-        onrendered: function(canvas) {
-            document.body.appendChild(canvas);
-            var myImage = canvas.toDataURL("image/png");
-            window.open(myImage);
-        }
-    });
-}
-
+//Función inicial a la API de ArcGIS 
+//Solicita un mapa, una escena 3D y un switch para cambiar la base del mapa
 require(["esri/Map", "esri/views/SceneView","esri/widgets/BasemapToggle"],
 function(Map, SceneView, BasemapToggle) {
+    //Crea el mapa con la base satelital
     var map = new Map({
         basemap: "satellite"
     });
-
+    
+    //Crear la escena 3D indicándole el elemento HTML, escala, posición inicial y zoom
     view = new SceneView({
         container: "viewDiv",
         map: map,
@@ -146,14 +172,8 @@ function(Map, SceneView, BasemapToggle) {
         zoom: 0
     });
     
-    view.on("click", function(evt) {
-        if (evt.mapPoint) {
-            lat = Math.round(evt.mapPoint.latitude * 1000) / 1000;
-            lon = Math.round(evt.mapPoint.longitude * 1000) / 1000;
-            buscarPais();                
-        }
-    });
-    
+    //Switch para cambiar la base del mapa
+    //De satelital a streets (con nombres de países)
     toggle = new BasemapToggle({
         view: view,
         nextBasemap: "streets" 
@@ -162,10 +182,12 @@ function(Map, SceneView, BasemapToggle) {
 
  });
 
+//Solicita el objeto 3D de un avión
 function getAvion(){
     opcAvion = true;
     opcSatelite = false;
     require(["esri/views/3d/externalRenderers"], function(externalRenderers) {
+        //Elimina el objeto 3D del satélite y agrega el avión a la escena
         try{
             externalRenderers.add(view, avion);
             externalRenderers.remove(view, satelite);
@@ -175,10 +197,12 @@ function getAvion(){
     });
 }
 
+//Solicita el objeto 3D de un satélite
 function getSatelite(){
     opcAvion = false;
     opcSatelite = true;
     require(["esri/views/3d/externalRenderers"], function(externalRenderers) {
+        //Elimina el objeto 3D del avión y agrega el satélite a la escena
         try{
             externalRenderers.add(view, satelite);
             externalRenderers.remove(view, avion);
@@ -188,45 +212,7 @@ function getSatelite(){
     });
 }
 
-function buscarPais(){
-    $.ajax({
-        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+ '&key=AIzaSyA206wa_9HvHofUAhSDXZ_-XVZbERaNR64',
-        type: 'GET',
-        success: function(data, status, jqXHR) {
-            if(data.results.length > 0){
-                for (var i = 0; i < data.results[0].address_components.length; i++) {
-                    if (data.results[0].address_components[i].types[0] === "country") {
-                        pais = data.results[0].address_components[i].long_name;
-                        buscarImagen();
-                        break;
-                    }                         
-                }
-            }
-        }
-    });
-}
-
-function buscarImagen(){
-    require(["esri/geometry/Point"], function(Point) {
-        $.ajax({
-            url: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=Fotografia aerea "+" "+pais+"&count=1",
-            type: 'GET',
-            headers: {'Ocp-Apim-Subscription-Key':keyBing},
-            success: function(data, status, jqXHR) {
-                var point = new Point({
-                    latitude: lat,
-                    longitude: lon
-                });
-                view.popup.open({
-                    title: pais,
-                    content: '<img src="'+data.value[0].contentUrl+'" width="200" height="100">',
-                    location: point
-                });
-            }
-        });
-    });
-}
-
+//Incremento en la puntuación
 function acierto(){
     puntos++;
     document.getElementById("puntos").textContent = puntos;
@@ -235,6 +221,7 @@ function acierto(){
     getDinamica();
 }
 
+//Indica cuando se genere un error
 function error(){
     var causa = errores[Math.floor(Math.random() * errores.length-1)];
     while(causa === undefined){
@@ -245,6 +232,7 @@ function error(){
     getDinamica();
 }
 
+//Tipos de errores
 var errores = ["¡Fallaste!",
                "¡Auch, Parece que el mapa no está centrado!", 
                "¡Te equivocaste de país!",
@@ -253,10 +241,13 @@ var errores = ["¡Fallaste!",
                "¡Incorrecto!",
                "¡El tipo de mapa no es el correcto!"];
 
+//Información de "fotografía aérea"
 var fotografia = {titulo: "Fotografía aérea", contenido: "La fotografía aérea supone un análisis de la superficie terrestre mediante el empleo de máquinas fotográficas instaladas a bordo de diversos medios aéreos. Encuentra aplicaciones en el campo de la investigación arqueológica o geológica, así como en agricultura para recabar información sobre la naturaleza de los terrenos y la extensión de los cultivos, o en el campo militar para obtener información sobre objetivos estratégicos. En arqueología se utiliza como método de prospección del subsuelo para descubrir estructuras en el subsuelo sin necesidad de excavar.", url:"http://www.notiultimas.com/digital/images/stories/mundiales/DIVERSAS/AVIONES/avion.sobre-ciudad.jpg"};
 
+//Información de "imagen satelital"
 var imagen = {titulo: "Imagen satelital", contenido: "Una imagen satelital es una representación visual de los datos reflejados por la superficie de la tierra que captura un sensor montado en un satélite artificial. Los datos son enviados a una estación terrena en donde se procesan y se convierten en imágenes, enriqueciendo nuestro conocimiento de las características de la Tierra en diferentes escalas espaciales. Los satélites de observación de la Tierra obtienen datos en el menor tiempo posible para dar seguimiento a la evolución de un fenómeno.", url:"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTzIRRwWkesZDpNjVYnj34oQ97EbEq5FCY4HQIdNFyazbgwTmRJEw"};
 
+//Lista de países para los ejercicios de la dinámica
 var paises = ["Afganistán","Albania","Alemania","Andorra","Angola","Antigua y Barbuda","Arabia Saudita","Argelia","Argentina","Armenia","Australia",
 "Austria","Azerbaiyán","Bahamas","Bangladés","Barbados","Baréin","Bélgica","Belice","Benín","Bielorrusia","Birmania","Bolivia","Bosnia y Herzegovina",
 "Botsuana","Brasil","Brunéi","Bulgaria","Burkina Faso","Burundi","Bután","Cabo Verde","Camboya","Camerún","Canadá","Catar","Chad","Chile","República Popular China","Chipre",

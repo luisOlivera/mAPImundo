@@ -70,7 +70,18 @@ function(externalRenderers, SpatialReference) {
                 transform.fromArray(externalRenderers.renderCoordinateTransformAt(view, [
                 view.center.longitude,view.center.latitude, 400000], SpatialReference.WGS84, new Array(16)));
                 this.iss.position.set(transform.elements[12], transform.elements[13], transform.elements[14]);
-                
+                //console.log(view.zoom);
+                if(view.zoom < 3){
+                    this.iss.scale.set(800000,800000,800000);
+                }else if(view.zoom < 4){
+                    this.iss.scale.set(400000,400000,400000);
+                }else if(view.zoom < 5){
+                    this.iss.scale.set(200000,200000,200000);
+                }else if(view.zoom < 6){
+                    this.iss.scale.set(100000,100000,100000);
+                }else{
+                    this.iss.scale.set(30000,30000,30000);
+                }
                 if (this.positionHistory.length > 0 &&  !this.cameraPositionInitialized) {
                     this.cameraPositionInitialized = true;
                     view.goTo({
