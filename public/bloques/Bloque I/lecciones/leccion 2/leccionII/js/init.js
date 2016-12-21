@@ -33,7 +33,7 @@ var banderaNacional = false;
 var banderaEstatal= false;
 var banderaMunicipal = false;
 var banderaFin = false;
-// posiscion  de continentes
+// posiscion  de continentes uxiliares
 var continente = { America:  {lat: 	32.05747949841406, lng: -89.67295446239592}, 
                    Europa: {lat: 48.46170337680241, lng: 	14.88124382393645} , 
                   Asia: {lat: 51.619583120617165,lng: 76.0741449972935},
