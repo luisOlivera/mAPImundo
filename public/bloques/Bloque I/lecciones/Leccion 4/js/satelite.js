@@ -1,22 +1,25 @@
 var satelite;
 
+//Indica que se agregarán objetos de three.js a ArcGIS
 require([
     "esri/views/3d/externalRenderers",
     "esri/geometry/SpatialReference"],
 function(externalRenderers, SpatialReference) {
     satelite = {
         renderer: null,     
-        camera: null,       
-        scene: null,        
+        camera: null,  //Camara de la escena     
+        scene: null,   //Escena de three.js     
         ambient: null,      
-        sun: null,          
-        iss: null,          
-        issScale: 200000,                                                    
-        issMaterial: new THREE.MeshLambertMaterial({ color: 0xe03110 }),    
+        sun: null,  //Iluminacion        
+        iss: null, //Satelite obj         
+        issScale: 200000,    //Escala inicial                                                
+        issMaterial: new THREE.MeshLambertMaterial({ color: 0xe03110 }), //Color del satélite   
         cameraPositionInitialized: false,
-        positionHistory: [],    
+        positionHistory: [], //Almacena posiciones del satélite   
       
+        //Funcion que se ejecutará al inicio
         setup: function(context) {
+            //Crea la imagen
             this.renderer = new THREE.WebGLRenderer({
                 context: context.gl,
                 premultipliedAlpha: false
@@ -26,6 +29,7 @@ function(externalRenderers, SpatialReference) {
             this.renderer.autoClearDepth = false;
             this.renderer.autoClearStencil = false;
             this.renderer.autoClearColor = false;
+            //Crea la escena, camara, iluminación
             this.scene = new THREE.Scene();
             var cam = context.camera;
             this.camera = new THREE.PerspectiveCamera(cam.fovY, cam.aspect, cam.near, cam.far);
@@ -34,6 +38,7 @@ function(externalRenderers, SpatialReference) {
             this.sun = new THREE.DirectionalLight(0xffffff, 0.5);
             this.scene.add(this.sun);
 
+            //Carga y crea el avión desde un archivo .obj
             var issMeshUrl = "obj/iss.obj";
             var loader = new THREE.OBJLoader(THREE.DefaultLoadingManager);
             loader.load(issMeshUrl, function(object3d) {
@@ -51,6 +56,7 @@ function(externalRenderers, SpatialReference) {
                 console.error("Error loading ISS mesh. ", error);
             });
       
+            //Posición inicial del satélite en el mapa/view
             this.positionHistory.push({
                 pos: [view.center.latitude, view.center.longitude, 400 * 1000]
             });
@@ -58,6 +64,7 @@ function(externalRenderers, SpatialReference) {
             context.resetWebGLState();
         },
 
+        //Función que se ejecutará siempre (loop) 
         render: function(context) {
             var cam = context.camera;
             this.camera.position.set(cam.eye[0], cam.eye[1], cam.eye[2]);
@@ -70,16 +77,27 @@ function(externalRenderers, SpatialReference) {
                 transform.fromArray(externalRenderers.renderCoordinateTransformAt(view, [
                 view.center.longitude,view.center.latitude, 400000], SpatialReference.WGS84, new Array(16)));
                 this.iss.position.set(transform.elements[12], transform.elements[13], transform.elements[14]);
-                
+                //Cambia la escala del satélite dependiendo del zoom
+                if(view.zoom < 3){
+                    this.iss.scale.set(800000,800000,800000);
+                }else if(view.zoom < 4){
+                    this.iss.scale.set(400000,400000,400000);
+                }else if(view.zoom < 5){
+                    this.iss.scale.set(200000,200000,200000);
+                }else if(view.zoom < 6){
+                    this.iss.scale.set(100000,100000,100000);
+                }else{
+                    this.iss.scale.set(30000,30000,30000);
+                }
                 if (this.positionHistory.length > 0 &&  !this.cameraPositionInitialized) {
                     this.cameraPositionInitialized = true;
                     view.goTo({
-                        target: [view.center.longitude, view.center.latitude],
-                        zoom: 0,
+                        target: [view.center.longitude, view.center.latitude]
                     });
                 }
             }
 
+            //Cambia la iluminación
             var l = context.sunLight;
             this.sun.position.set(
                 l.direction[0],
