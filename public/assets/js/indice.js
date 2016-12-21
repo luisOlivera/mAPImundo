@@ -53,7 +53,7 @@ function showIndice() {
 		$("#registrar").hide();
 	});
 
-	$("#sesion").click(function(){
+	$("#salir").click(function(){
 		localStorage.clear();
 		window.location="http://localhost:3000/";
 	});

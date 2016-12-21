@@ -633,7 +633,7 @@ var guardarCalificacion = function(leccion, bloque, calif){
 		data: {user: user, puntaje: calif, bloque: bloque, leccion:leccion},
         success: function(data){
           console.log(data);
-           window.location="http://localhost:3000/indice.html";
+          window.location="http://localhost:3000/bloques/Bloque%20I/index.html";
         }
         });
 }

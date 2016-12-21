@@ -22,7 +22,6 @@
   </div>
   <div id="indice" style="display:none;" class="animate-bottom">
     <h2 id="usuario"></h2>
-    <p id="sesion">Cerrar sesion</p>
     <h1 id="titulo">INDICE</h1>
     <header>
       <a href="bloques/Bloque I/index.html">    
@@ -58,7 +57,8 @@
     </header> 
     <a href="index.html">
       <i id="home" class="fa fa-home leap-interactive" aria-hidden="true"></i>
-    </a> 
+    </a>
+    <i id="salir" class="fa fa-sign-out leap-interactive" aria-hidden="true"> Cerrar sesión</i>
   </div>
   <div id="login" style="display:none;" class="modal">
     <form class="modal-content animate">
@@ -72,10 +72,11 @@
         <button class="leap-interactive" id="aceptar" onclick="nombreValido()">Aceptar</button>
       </div>
     </form>
-    <p id="ayuda" class="animate ">
+    <p id="ayuda" class="animate">
       Puedes decir tu nombre hasta que sea el correcto.
     </p>
-    <button class="leap-interactive" id="BotonRegistro" class="animate ">Presiona para registrarte</button>
+    <button class="animate leap-interactive" id="BotonRegistro">
+    <i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse</button>
   </div>
 
  <div id="registrar" style="display:none;" class="modal">
@@ -91,8 +92,8 @@
         
       </div>
     </form>
-    <button class="leap-interactive" id="registrar" onclick="registroValido()">Registrarse</button>
-     <button class="leap-interactive" id="regresar" class="animate ">Presiona para regresar</button>
+    <button class="leap-interactive animate" id="bregistrar" onclick="registroValido()"><i class="fa fa-check" aria-hidden="true"></i> Aceptar</button>
+     <button class="leap-interactive animate" id="regresar">Presiona para regresar</button>
   </div>
 
 </body>
