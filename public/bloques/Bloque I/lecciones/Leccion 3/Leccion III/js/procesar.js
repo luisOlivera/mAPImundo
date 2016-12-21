@@ -14,6 +14,7 @@ var procesar = (function(){
 
 	var simbologiasEnIngles = ["restaurant", "lodging", "hospital", "pharmacy", "store", "bank", "church"];
 	
+	var terminado = false;
 	var procesar = function(texto){
 		totalIntentos = 0;
 		intentos = 3;
@@ -76,7 +77,9 @@ var procesar = (function(){
 		var pIntentos = document.getElementById('intentos');
 		var pAtinados = document.getElementById('atinados');
 		var pPuntos = document.getElementById('puntos');
-		totalIntentos++;
+		if(totalIntentos <= intentos){
+			totalIntentos++;
+		}
 		for(var i = 0; i < arrayLocation.length; i++){
 			//console.log(arrayLocation[i].lat + "   " + res.geometry.location.lat() + arrayLocation[i].lng + "   " + res.geometry.location.lng());
 			if(arrayLocation[i].lat === res.geometry.location.lat() && arrayLocation[i].lng === res.geometry.location.lng()){
@@ -84,7 +87,7 @@ var procesar = (function(){
 			}
 		}
 
-		if(i === arrayLocation.length){
+		if(i === arrayLocation.length && terminado === false){
 			arrayLocation.push({"lat": res.geometry.location.lat(), "lng": res.geometry.location.lng()});
 			//console.log(res);
 			if(totalJuegos <= 3){
@@ -145,6 +148,8 @@ var procesar = (function(){
 			simbolo[2] + ": " +totalAtinados[2] + "/" + numSimbolo[2];
 			if(totalIntentos > intentos){
 				if(totalJuegos === 5){
+					terminado = true;
+					responsive.leer("Lo siento ya superaste el total de intentos");
 					responsive.leer("Felicidades, terminaste la lección con un puntaje de " + puntos.toFixed(1));
 				}else{
 					reiniciarValores();
@@ -157,6 +162,7 @@ var procesar = (function(){
 				puntos = puntos + (2/(totalIntentos/(numSimbolo[0] + numSimbolo[1] + numSimbolo[2])));
 				pPuntos.innerHTML = "Puntos: " + puntos.toFixed(1);
 				if(totalJuegos === 5){
+					terminado = true;
 					responsive.leer("Felicidades, terminaste la lección con un puntaje de " + puntos.toFixed(1));
 				}else{
 					reiniciarValores();

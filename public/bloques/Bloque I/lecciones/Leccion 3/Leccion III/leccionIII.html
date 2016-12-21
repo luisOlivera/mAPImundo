@@ -31,8 +31,8 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<div class="overlay-content">
 			<a href="../../../index.html"><i class="fa fa-list" aria-hidden="true"></i> Leccion</a>
-			<a href="../../../../../indice.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
-			<a href="../../../../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
+    		<a href="../../../../../indice.html"><i class="fa fa-book" aria-hidden="true"></i> Indice</a>
+    		<a href="../../../../../index.html"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
 		</div>
 	</div>
 	<div id="app">
@@ -42,12 +42,13 @@
 				Los planos son la representación de una ciudad vista desde arriba,como si volaras sobre ella. Desde esa perspectiva se puede observar
       			el trazado de las calles y las manzanas, así como algunos lugares de
       			interés, monumentos, construcciones de valor artístico y museos.
-      			<div id="imagenes">
+      			<p></p>
+			<div id="imagenes">
 				<center>
-				<img src="imagenes/simbologia.png" align="center" ="center" style="width:80%" onclick="funciones.openModal();funciones.currentSlide(1)" class="hover-shadow cursor leap-interactive">
+				<img src="imagenes/simbologia.png" align="center" ="center" style="width:70%" onclick="funciones.openModal();funciones.currentSlide(1)" class="hover-shadow cursor">
 				</center>
 				<div id="myModal" class="modal">
-					<span class="close cursor leap-interactive" onclick="funciones.closeModal()" >&times;</span>
+					<span class="close cursor" onclick="funciones.closeModal()">&times;</span>
 					<div class="modal-content">
 						<div class="mySlides">
 							<img src="imagenes/simbologia.png" style="width:100%">
@@ -55,17 +56,15 @@
 					</div>
 				</div>
 			</div> 
-			</div>
-			<p></p>
-			
 			<p></p>
 			<center>
-			<input type="button" value="Iniciar" onclick="procesar.procesar('INICIAR')" class="leap-interactive">
+			<input type="button" value="Iniciar" onclick="procesar.procesar('INICIAR')">
 			</center>
 			<p id="instrucciones" style="color: #fff"></p>
       		<p id="intentos" style="color: #fff"></p>
       		<p id="atinados" style="color: #fff"></p>
       		<p id= "puntos" style="color: #fff"></p>
+			</div>
 		</div>
 	</div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBRlScymyRJ8e6MHdY4a_uU7l_-4UAtXo&libraries=places&callback=initMap" async defer></script>
