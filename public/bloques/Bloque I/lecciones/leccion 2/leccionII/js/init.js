@@ -1,4 +1,4 @@
-// textos para reproducir 
+// textos para reproducir  en a leccion 2
 var texto = "Bienvenido a la leccion 2, ahora aprenderemos nuevas formas de representar el espacio geográfico. Veamos los tipos en que se representa el espacio geográfico."+"    Da click sobre iniciar" ;
 var texto2 = "Presta mucha atencion "
 var continentalText = "En el planisferio y en los mapas continentales, se representa reducida la extensión territorial de los países. y se muestra un continente completo  como:  "+" América, "+"  Africa, " +" Asia, "+" Oseanía, "+ " Europa ";
