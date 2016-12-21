@@ -19,6 +19,7 @@ function getObjetivo(){
     hablar(localStorage.usuario+" esta es la ultima lección del bloque 1. Descubrirás otros recursos para obtener información geográfica. Podrás distinguir las características y utilidad de las fotografías aéreas e imágenes satelitales,  da click en el botón jugar cuándo estés listo.");
 }
 
+//Cuando el usuario necesita ayuda para buscar el país
 function buscar(){
     ayuda = true;
     lat = geocode[rnd].latitude;
@@ -252,6 +253,7 @@ function error(){
     getEjercicio();
 }
 
+//Finaliza lección y guarda en la base de datos
 function terminar(){
     hablar("Felicidades has terminado la lección con "+puntos+" puntos.");
     document.getElementById("tblMedios").style.display = "none";
