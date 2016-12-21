@@ -1,10 +1,9 @@
+//Módulo que contiene las funciones para el uso de la API de Bing
 var bing = (function(){   
+    //Función para descargar las imagenes de los países
     var descargar_imagenes = function(texto){
         $(function() {
-            //console.log("descargar_imagenes");
             var params = {
-            // Request parameters
-            //q:"Población de " + texto + "2016"
             q:"estadisticas de poblacion en " +texto+" 2016"
         };
 
@@ -15,7 +14,6 @@ var bing = (function(){
                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","868f19301c294a73820863d7a730ac3e");
             },
             type: "POST",
-            //data: "{body}",
         })
         .done(function(data) {
             
@@ -28,11 +26,7 @@ var bing = (function(){
             new_div.id = "imagenes";
             center.appendChild(new_div);
             var div_actual = document.getElementById('imagenes');
-            /*while (div_imagen.hasChildNodes()) {   
-                div_imagen.removeChild(div_imagen.firstChild);
-            }*/
             if(data.value.length > 0){
-                //console.log(data);
                 var max = 5;
                 if(data.value.length < 5){
                     max = data.value.length;
@@ -48,12 +42,8 @@ var bing = (function(){
                 }
                 carousel();
             }
-
-            //alert("success");
         })
         .fail(function() {
-            console.log("Error");
-            //alert("error");
         });
     });
     }

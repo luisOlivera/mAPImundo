@@ -1,5 +1,5 @@
+//Módulo que contiene las funciones para la PAI de google maps
 var mapa = (function(){
-
 	var initialize = function(lat, lng) {
 		var divView = document.getElementById("viewDiv");
         divView.removeChild(divView.childNodes[0]);
@@ -15,7 +15,6 @@ var mapa = (function(){
 
       google.maps.event.addListener(map, 'zoom_changed', function() {
         var z = map.getZoom();
-        //verificarZoom(map.zoom);
       });
   }
 

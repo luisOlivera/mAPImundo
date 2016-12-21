@@ -13,7 +13,7 @@ var countries = new Array("Afganistán","Albania","Alemania","Andorra","Angola",
 "Serbia","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka","Suazilandia","Sudán","Sudán del Sur","Suecia","Suiza","Surinam","Tailandia","Tanzania","Tayikistán",
 "Timor Oriental","Togo","Tonga","Trinidad y Tobago","Túnez","Turkmenistán","Turquía","Tuvalu","Ucrania","Uganda","Uruguay","Uzbekistán","Vanuatu","Venezuela","Vietnam","Yemen",
 "Yibuti","Zambia","Zimbabue");
-
+//Módulo que contiene las funciones para  la dinámica
 var procesar = (function(){		
 	var colores = ["rojo", "verde", "azul", "rosa", "amarillo"];
 	var color = "";
@@ -24,7 +24,7 @@ var procesar = (function(){
 	var intentosAcumulados = 0;
 	var totalIntentos1 = 3;
 	var coloresUsados = [];
-	//var textoIns = "";
+	//Función que se ejecuta cada que inicia un nuevo ejercicio para generar las preguntas
 	var procesar = function(texto){
 		texto = texto.trim();
 		texto = texto.toUpperCase();
@@ -42,7 +42,7 @@ var procesar = (function(){
 				instrucciones.innerHTML = "Felicidades, terminaste la lección 1";
 				coloresUsados = [];
 			}else{
-			color = colores[Math.floor((Math.random() * colores.length))];
+			color = colores[Math.floor((Math.random() * colores.length))]; //Aquí se genera la pregunta con n random
 			var index = coloresUsados.indexOf(color);
 			while(index >= 0){
 				color = colores[Math.floor((Math.random() * colores.length))];
@@ -83,6 +83,7 @@ var procesar = (function(){
 		}
 	}
 
+	//Aquí se evalúa si el marcador seleccionado es el correcto
 	var evaluar = function(res){
 		var pIntentos = document.getElementById('intentos');
 		var pAtinados = document.getElementById('atinados');
@@ -96,9 +97,7 @@ var procesar = (function(){
 			var poblacionActual = poblaciones[indice];
 			responsive.leer(countries[indice]);
 			responsive.leer(poblacionActual)
-			//console.log(poblacionActual);
 			if(poblacionActual > poblacionMin && poblacionActual < poblacionMax){
-				console.log("Atinaste");
 				atinados++;
 			}
 			if(atinados === numPaises){

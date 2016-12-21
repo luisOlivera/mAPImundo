@@ -1,18 +1,18 @@
-var map;
-function initMap() {  
+//Este módulo contiene las funciones de google maps necesarios para usar el mapa en la aplicación.
 
+var map; 
+//Funicón que carga el mapa y lo agrega a la aplicación
+function initMap() {  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       
       var pos = {
-        //lat: position.coords.latitude,
-        //lng: position.coords.longitude
         lat: 17.060793,
         lng: -96.725303
       };
-      //map.setCenter(pos);
+      //En esta parte se crea el mapa
       map = new google.maps.Map(document.getElementById('map'), {
-        center: pos,//{lat: 17.077415, lng: -96.744437},
+        center: pos,
         zoom: 18,
         zoomControl: true,
         mapTypeControl: true,
@@ -20,9 +20,8 @@ function initMap() {
         streetViewControl: true,
         rotateControl: true,
       });
-      map.addListener('click', function(evt) {
-        //placeMarkerAndPanTo(e.latLng, map);
-        
+      //Aquí se agrega el evento del click al mapa
+      map.addListener('click', function(evt) {        
         if(evt.placeId){
           funciones.descargarDatos(evt.placeId);
         }
@@ -34,7 +33,6 @@ function initMap() {
 
 function leerTexto(){
   responsive.iniciar();
-  //responsive.leer("hola");
   responsive.leer("Bienvenido a la primera dinámica de la lección 3, antes de iniciar con la dińamica te recomiendo que veas las simbologías, da click en el botón iniciar cuándo estés listo");
 }
 

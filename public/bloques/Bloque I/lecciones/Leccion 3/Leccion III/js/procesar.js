@@ -1,4 +1,4 @@
-
+//Módulo que contiene las funciones necesarias para el funcionamiento de la dinámica
 var procesar = (function(){		
 	var simbolo = [];
 	var numSimbolo = [];
@@ -15,6 +15,8 @@ var procesar = (function(){
 	var simbologiasEnIngles = ["restaurant", "lodging", "hospital", "pharmacy", "store", "bank", "church"];
 	
 	var terminado = false;
+
+	//Función que se ejecuta al iniciar cada ejercicio de la dinámica
 	var procesar = function(texto){
 		totalIntentos = 0;
 		intentos = 3;
@@ -23,7 +25,6 @@ var procesar = (function(){
 		//console.log(texto);
 		texto = texto.trim();
 		texto = texto.toUpperCase();
-		//console.log(texto);
 		if(texto === "INICIAR"){
 			totalJuegos++;
 			if(totalJuegos <= 3){
@@ -32,9 +33,7 @@ var procesar = (function(){
 					simbolo[0] = simbologias[Math.floor((Math.random() * simbologias.length))];
 				}
 				elementoActual = simbolo[0];
-				//numSimbolo[0] = Math.floor((Math.random() * 3) + 2);
 				numSimbolo[0] = Math.round(Math.random()*(3-2)+parseInt(2));
-				//console.log(numSimbolo[0]);
 				intentos += numSimbolo[0];
 				totalAtinados[0] = 0;
 				pIntentos.innerHTML = "intentos: " + intentos;
@@ -44,7 +43,7 @@ var procesar = (function(){
 				instrucciones.innerHTML = textoIns;
 				responsive.leer(textoIns);
 			}else if(totalJuegos <= 5){
-				simbolo[0] = simbologias[Math.floor((Math.random() * simbologias.length))];
+				simbolo[0] = simbologias[Math.floor((Math.random() * simbologias.length))];//Aquí se crean las preguntas de manera aleatoria
 				simbolo[1] = simbologias[Math.floor((Math.random() * simbologias.length))];
 				while( simbolo[0] === simbolo[1]){
 					simbolo[1] = simbologias[Math.floor((Math.random() * simbologias.length))];
@@ -73,6 +72,7 @@ var procesar = (function(){
 		}
 	}
 
+	//Función que evalua el ejercicio, esta función es llamada cada que el usuario selecciona una simbología en el mapa
 	var evaluar = function(res){
 		var pIntentos = document.getElementById('intentos');
 		var pAtinados = document.getElementById('atinados');
@@ -80,8 +80,8 @@ var procesar = (function(){
 		if(totalIntentos <= intentos){
 			totalIntentos++;
 		}
+		//Aquí se verifica que no se repita la misma sombología que el usuario seleccionó
 		for(var i = 0; i < arrayLocation.length; i++){
-			//console.log(arrayLocation[i].lat + "   " + res.geometry.location.lat() + arrayLocation[i].lng + "   " + res.geometry.location.lng());
 			if(arrayLocation[i].lat === res.geometry.location.lat() && arrayLocation[i].lng === res.geometry.location.lng()){
 				break;
 			}
@@ -89,7 +89,6 @@ var procesar = (function(){
 
 		if(i === arrayLocation.length && terminado === false){
 			arrayLocation.push({"lat": res.geometry.location.lat(), "lng": res.geometry.location.lng()});
-			//console.log(res);
 			if(totalJuegos <= 3){
 				if(res.types.length > 0){
 					var id = -1;
@@ -99,26 +98,22 @@ var procesar = (function(){
 							break;
 						}
 					}
-				//console.log(id);
 				if(id >= 0){
 					if(simbologias[id] === simbolo[0]){	
 						totalAtinados[0] = totalAtinados[0]+1;		
-						//console.log("atinaste");
 					}
 				}
 			}
 			pIntentos.innerHTML = "intentos: " + (intentos-totalIntentos);
 			pAtinados.innerHTML = simbolo[0] + ": " +totalAtinados[0] + "/" + numSimbolo[0];
-			//console.log(totalAtinados[0] +" "+numSimbolo[0]);
+			//Aquí se verifican los intentos 
 			if(totalIntentos > intentos){
 				responsive.leer("Lo siento ya superaste el total de intentos");
 				reiniciarValores();
 				procesar("INICIAR");
 			}else if(totalAtinados[0] >= numSimbolo[0]){
 				responsive.leer("Excelente, continuemos");
-				//puntos = puntos + ((totalIntentos - numSimbolo[0]) * 2)/numSimbolo[0];
 				puntos = puntos + (2/(totalIntentos/numSimbolo[0]));
-				//console.log(puntos);
 				pPuntos.innerHTML = "Puntos: " + puntos.toFixed(1);
 				reiniciarValores();
 				procesar("INICIAR");
@@ -126,19 +121,15 @@ var procesar = (function(){
 		}else if(totalJuegos <= 5){
 			if(res.types.length > 0){
 				var id = simbologiasEnIngles.indexOf(res.types[0]);
-				//console.log(id);
 				if(id >= 0){
 					if(simbologias[id] === simbolo[0] && totalAtinados[0] < numSimbolo[0]){	
 						totalAtinados[0] = totalAtinados[0]+1;		
-						//console.log("atinaste 1");
 					}
 					if(simbologias[id] === simbolo[1] && totalAtinados[1] < numSimbolo[1]){
 						totalAtinados[1] = totalAtinados[1]+1;		
-						//console.log("atinaste 2");
 					}
 					if(simbologias[id] === simbolo[2] && totalAtinados[2] < numSimbolo[2]){
 						totalAtinados[2] = totalAtinados[2]+1;		
-						//console.log("atinaste 3");
 					}
 				}
 			}
@@ -173,7 +164,6 @@ var procesar = (function(){
 			
 		}
 	}
-		//console.log(totalAtinados);
 	}
 
 	function reiniciarValores(){
