@@ -2,12 +2,7 @@ var funciones = (function(){
 	
   var arrayImg = new Array(9);
 
-  var cargarImagenes = function(){
-    for(var i = 0; i < arrayImg.length; i++){
-      arrayImg[i] = "../imagenes/"+(i+1)+".png";
-    }
-  }
-
+  //Función que descarga datos del lugar que el usuario seleccionó (restaurante, hospital. etc)
   var descargarDatos = function(id){
     var resultado = "";
     var service = new google.maps.places.PlacesService(map);
@@ -15,8 +10,6 @@ var funciones = (function(){
       placeId: id
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        //var place.geometry.location.lat()
-        console.log(place);
         procesar.evaluar(place);
       }
     });

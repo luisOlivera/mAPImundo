@@ -1,4 +1,4 @@
-
+//Módulo que procesa la interacción entre el usuario y ala aplicación mediante la voz
 var procesar = (function(){	
 
 	var países = new Array("AFGANISTAN", "ALBANIA", "ARGELIA", "ANDORRA", "ANGOLA", "ANTARTIDA", "ANTIGUA Y BARBUDA",
@@ -25,7 +25,6 @@ var procesar = (function(){
 	
 
 	var procesar = function(texto){
-		//console.log(texto);
 		texto = texto.trim();
 		texto = texto.toUpperCase();
 		console.log(texto);

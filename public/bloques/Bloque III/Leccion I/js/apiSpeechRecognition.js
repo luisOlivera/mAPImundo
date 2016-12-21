@@ -22,12 +22,10 @@ var speech = (function(){
 	var escuchar = function(){
 		recognition.onresult = function(event) {
 			if(event.results[event.results.length-1].isFinal){
-				//console.log(recognition);
 				procesar.procesar(event.results[event.results.length-1][0].transcript);
 			}
 		}
 	} 
-
 
 	return {
 		"iniciar": iniciar,

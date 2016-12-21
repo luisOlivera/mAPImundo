@@ -21,6 +21,7 @@ var geocode = [
 
 var poblaciones = [];
 var view;
+//módulo que carga las funciones el mapa en 3d
 require([
   "esri/Map",
   "esri/views/SceneView",
@@ -46,17 +47,11 @@ require([
       if(evt.mapPoint != undefined){
         var dato = descargar(evt.mapPoint.latitude, evt.mapPoint.longitude);
         dato = JSON.parse(dato);
-        //console.log(dato.results.length);
         if(dato.results.length > 0){
           var pais = dato.results[0].formatted_address;
-          //console.log(pais);
           procesar.evaluar(pais);
         }
       }
-      
-      
-      //console.log(pais);
-      //console.log(evt.target.graphics);
     });
 
 
@@ -67,6 +62,7 @@ require([
       descargarPoblacion(countries[i], i);
     }
 
+    //Esta función descarga la población de cada país, para esto se usa la API de wikipedia
     function descargarPoblacion(pais, indice) {
       var poblacion = "";
       var url = 'https://es.wikipedia.org/w/api.php?format=json&action=query&titles='+pais+'&prop=revisions&rvprop=content&callback=?';
@@ -78,11 +74,8 @@ require([
       contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(data, status, jqXHR) {
-            //console.log(data);
             var xml = objectToXml(data);
-            //console.log(xml);
             var xml = ""+xml;
-
             if(xml.search("\\|" +" población_estimación ") > 0){
               var n2 = xml.search("\\|"+" población_estimación ");
               var res = xml.substring(n2+23, n2+50);
@@ -94,7 +87,6 @@ require([
             }else if(xml.search("\\|"+" población ") > 0){
               var count_signo = 0;
               var n2 = xml.search("\\|"+" población ");              
-                //if(n2 > 0){
                   var res = xml.substring(n2+12, n2+70);
                   for(var i = 0; i < res.length; i++){
                     if(res[i] === '='){
@@ -107,10 +99,8 @@ require([
                       poblacion += res[i];
                     }
                   }
-              //}
             }else if(xml.search("\\|"+"población") > 0){
               var n2 = xml.search("\\|"+"población");              
-                //if(n2 > 0){
                   var count_signo = 0;
                   var res = xml.substring(n2+10, n2+60);
                   for(var i = 0; i < res.length; i++){
@@ -126,7 +116,6 @@ require([
                   }
             }else if(xml.search("\\|"+"Población") > 0){
               var n2 = xml.search("\\|"+"Población");              
-                //if(n2 > 0){
                   var count_signo = 0;
                   var res = xml.substring(n2+12, n2+60);
                   for(var i = 0; i < res.length; i++){
@@ -144,7 +133,6 @@ require([
                       poblacion += res[i];
                     }
                   }
-                  //poblaciones.push(poblacion);
             }else if(xml.search("capital_población") > 0){
                 var n3 = xml.search("capital_población"); 
                 var res = xml.substring(n3+18, n3+30);
@@ -154,16 +142,13 @@ require([
                     }
                   }
             }
-            //console.log(poblacion.trim());
-            //console.log(countries[indice] + "  " + poblacion.trim());
             var auxP = "";
             for(var i = 0; i < poblacion.length; i++){
               if(poblacion[i] != ' '){
                 auxP+=poblacion[i];
               }
             }
-            //console.log(countries[indice]);
-            //console.log(auxP);
+
             poblaciones[indice] = auxP;
             var seguir = true;
             for(var j = 0; j < poblaciones.length; j++){
@@ -180,10 +165,9 @@ require([
   
 }
 
+//Función que agrega los marcadores en el mapa
 function agregarMarker(){
-  //console.log(poblaciones.length);
     for(var i = 0; i < poblaciones.length; i++){     
-      //console.log(countries[i] + "  " + poblaciones[i]);
       var lat = geocode[i].latitude;
       var lng = geocode[i].longitude;
       var tam = 0;
@@ -233,15 +217,12 @@ function agregarMarker(){
           content: "Población actual: " + poblaciones[i]
         }
       });
-      
-      
-      //console.log(pointGraphic);
-      //view.graphics.add(markerSymbol);
       view.graphics.addMany([pointGraphic]);
     }
 
 }
 
+//Función que convierte JSON-XML
 function objectToXml(obj) {
         var xml = '';
 
@@ -267,6 +248,7 @@ function objectToXml(obj) {
     
   });
 
+//Función que usa la PAI de google maps para convertir las coordenadas a nombre del país
 var descargar = function(lat, lng) {
   var resultado = "";
     var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&result_type=country&key=AIzaSyBpdj7XOphKt90W55zO6UFdqNtpxmFjxWc";
@@ -277,7 +259,6 @@ var descargar = function(lat, lng) {
           resultado = this.responseText;
         } else {
           resultado =  mensaje = "Error " + this.status + " " + this.statusText + " - " + this.responseURL;
-          //console.log(mensaje);
         }
       }
     };
