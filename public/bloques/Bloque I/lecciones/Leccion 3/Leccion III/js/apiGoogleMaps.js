@@ -35,6 +35,6 @@ function initMap() {
 function leerTexto(){
   responsive.iniciar();
   //responsive.leer("hola");
-  responsive.leer("Bienvenido a la primera dinámica de la lección 4, antes de iniciar con la dińamica te recomiendo que veas las simbologías, da click en el botón iniciar cuándo estés listo");
+  responsive.leer("Bienvenido a la primera dinámica de la lección 3, antes de iniciar con la dińamica te recomiendo que veas las simbologías, da click en el botón iniciar cuándo estés listo");
 }
 

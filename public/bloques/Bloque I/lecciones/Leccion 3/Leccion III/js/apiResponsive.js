@@ -3,8 +3,8 @@ var responsive = (function(){
 
 	var iniciar = function(){
 		responsiveVoice.speech_onend = function(){
-			speech.iniciar();
-			speech.escuchar();
+			//speech.iniciar();
+			//speech.escuchar();
 		};
 
 		responsiveVoice.setDefaultVoice("Spanish Latin American Female");
