@@ -27,8 +27,9 @@
   		<li id="menu" onclick="openNav()">&#9776;</li>
   		<li id="leccion">Leccion 4</li>
   		<li id="titulo">Nuevas formas de ver los espacios geográficos</li>
+        <li id="pLeccion">Puntos:</li>
         <li id="puntos">0</li>
-  		<li id="user"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Usuario</li>
+  		<li id="user"></li>
 	</ul>
 	<div id="myNav" class="overlay">
   		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -54,15 +55,15 @@
                     <table id="tblMedios" style="display: none;">
                         <tbody>
                             <tr>
-                                <td style="text-align: center;"><h4>Avión</h4></td>
-                                <td style="text-align: center;"><h4>Satélite</h4></td>
+                                <td style="text-align: center;"><h5>Avión</h5></td>
+                                <td style="text-align: center;"><h5>Satélite</h5></td>
                             </tr>
                             <tr>
-                                <td><a href="#" onclick="getAvion();" class="leap-interactive">
-                        <img title="Fotografía aérea" src="img/avion.png" width="150" height="150" class="leap-interactive">
+                                <td style="text-align: center;"><a href="#" onclick="getAvion();" class="leap-interactive">
+                        <img title="Avion" src="img/avion.png" width="150" height="150" class="leap-interactive">
                     </a></td>       
-                                <td><a href="#" onclick="getSatelite();" class="leap-interactive">
-                        <img title="Imagen satelital" src="img/satelite.png" width="150" height="150" class="leap-interactive">
+                                <td style="text-align: center;"><a href="#" onclick="getSatelite();" class="leap-interactive">
+                        <img title="Satélite" src="img/satelite.png" width="150" height="150" class="leap-interactive">
                     </a></td>
                             </tr>
                             <tr></tr>
@@ -72,6 +73,7 @@
                             <tr></tr>
                             <tr></tr>
                             <tr><td style="text-align: center; font-size: 14px;" colspan="2">Pista: Si quieres ver el mapa con los nombres de los países has click en el pequeño recuadro situado en la esquina inferior izquierda. Cámbialo una vez más para poder tomar la foto.</td> </tr>
+                            <tr><td style="text-align: center; font-size: 14px;" colspan="2">Te recuerdo que si solicitas ayuda para buscar el país se te sumará medio punto en caso de que aciertes.</td> </tr>
                         </tbody>
                     </table>                    
                 </center>
@@ -81,12 +83,14 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; font-size: 18px;">Fotografía aérea</td>
+                                <td></td>
                                 <td style="text-align: center; font-size: 18px;">Imagen satelital</td>
                             </tr>
                             <tr>
                                 <td><a href="#" onclick="getFotografia();">
                         <img title="Fotografía aérea" src="img/aerea.jpg" width="150" height="150">
-                    </a></td>       
+                    </a></td>  
+                                <td width="10%"></td>
                                 <td><a href="#" onclick="getImagen();">
                         <img title="Imagen satelital" src="img/satelital.jpg" width="150" height="150">
                     </a></td>
@@ -95,7 +99,8 @@
                     </table>                    
                     
                     <br>
-                    <button id="btnJugar" onclick="getDinamica();" class="leap-interactive">Jugar</button>
+                    <a id="btnJugar" onclick="getDinamica();" class="leap-interactive"><img id="imgBoton" src="img/jugar.png" width="100" height="70"></a>
+                    <a id="btnBuscar" style="display: none;" onclick="buscar();" class="leap-interactive"><img src="img/buscar.png" width="75" height="70"></a>
                 </center>
 	    	</div>
 	    </div>
