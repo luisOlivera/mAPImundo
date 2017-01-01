@@ -40,26 +40,27 @@ var clickMap = function (evt) {
     nombre_corto = regresaNombreCorto(lat, lng);
     console.log(nombre_corto);
 if(nombre_corto != undefined){
+    $("#pais").hide();
        var conti = regresaContinente(nombre_corto);
         view.popup.open({
           title: "Continente: "+ conti,
           location: evt.mapPoint
         });
         if(conti === "America"){
-          $("#texto").text(informacion_America.cadena.split(".")[0] +". " + informacion_America.cadena.split(".")[1]+ ". " + informacion_America.cadena.split(".")[2]+ ". " + informacion_America.cadena.split(".")[3]+". " + informacion_America.cadena.split(".")[4]+ ". " + informacion_America.cadena.split(".")[5]  +". ");
+          $("#texto").text(informacion_America.cadena.split(".")[0] +". " + informacion_America.cadena.split(".")[1]+ ". " + informacion_America.cadena.split(".")[2]+ ". " + informacion_America.cadena.split(".")[3]+". " + informacion_America.cadena.split(".")[4]+". ");
           _getVideo("2_4G73UIZFo");
         }else if(conti === "Africa"){
-           $("#texto").text(informacion_Africa.cadena.split(".")[0] +". " + informacion_Africa.cadena.split(".")[1]+ ". " + informacion_Africa.cadena.split(".")[2]+ ". " + informacion_Africa.cadena.split(".")[3]+". " + informacion_Africa.cadena.split(".")[4]+ ". " + informacion_Africa.cadena.split(".")[5]  +". ");
+           $("#texto").text(informacion_Africa.cadena.split(".")[0] +". " + informacion_Africa.cadena.split(".")[1]+ ". " + informacion_Africa.cadena.split(".")[2]+ ". " + informacion_Africa.cadena.split(".")[3]+". " + informacion_Africa.cadena.split(".")[4]+ ". ");
            _getVideo("ktgUMIcRp0c");
           
         }else if(conti === "Europa"){
-          $("#texto").text(informacion_Europa.cadena.split(".")[0] +". " + informacion_Europa.cadena.split(".")[1]+ ". " + informacion_Europa.cadena.split(".")[2]+ ". " + informacion_Europa.cadena.split(".")[3]+". " + informacion_Europa.cadena.split(".")[4]+ ". " + informacion_Europa.cadena.split(".")[5]  +". ");
+          $("#texto").text(informacion_Europa.cadena.split(".")[0] +". " + informacion_Europa.cadena.split(".")[1]+ ". " + informacion_Europa.cadena.split(".")[2]+ ". " + informacion_Europa.cadena.split(".")[3]+". " + informacion_Europa.cadena.split(".")[4]+ ". ");
           _getVideo("-_7_exajlEs");
         }else if(conti === "Oceania"){
-          $("#texto").text(informacion_Oceania.cadena.split(".")[0] +". " + informacion_Oceania.cadena.split(".")[1]+ ". " + informacion_Oceania.cadena.split(".")[2]+ ". " + informacion_Oceania.cadena.split(".")[3]+". " + informacion_Oceania.cadena.split(".")[4]+ ". " + informacion_Oceania.cadena.split(".")[6] +".");
+          $("#texto").text(informacion_Oceania.cadena.split(".")[0] +". " + informacion_Oceania.cadena.split(".")[1]+ ". " + informacion_Oceania.cadena.split(".")[2]+ ". " + informacion_Oceania.cadena.split(".")[3]+". " + informacion_Oceania.cadena.split(".")[4]+ ". " );
           _getVideo("DJBd23NWa50");
         }else if(conti === "Asia"){
-           $("#texto").text(informacion_Asia.cadena.split(".")[0] +". " + informacion_Asia.cadena.split(".")[1]+ ". " + informacion_Asia.cadena.split(".")[2]+ ". " + informacion_Asia.cadena.split(".")[3]+". " + informacion_Asia.cadena.split(".")[4]+ ". " + informacion_Asia.cadena.split(".")[5] +". " + informacion_Asia.cadena.split(".")[6] +". ");
+           $("#texto").text(informacion_Asia.cadena.split(".")[0] +". " + informacion_Asia.cadena.split(".")[1]+ ". " + informacion_Asia.cadena.split(".")[2]+ ". " + informacion_Asia.cadena.split(".")[3]+". " + informacion_Asia.cadena.split(".")[4]+ ". " + informacion_Asia.cadena.split(".")[5] +". ");
           _getVideo("_4S94ucWml4");
         }      
 }
@@ -565,7 +566,7 @@ var _hacerConsulta = function(url, variable){
 
   var _getVideo = function(id){
 
-    $("#video").html("<iframe width='250' height='100' src='https://www.youtube.com/embed/"+id+"' allowfullscreen></iframe>");
+    $("#video").html("<iframe class='leap-interactive' width='250' height='100' src='https://www.youtube.com/embed/"+id+"' allowfullscreen></iframe>");
          
   };
 

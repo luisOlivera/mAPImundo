@@ -34,7 +34,6 @@ var funciones = (function(){
 
   return {
     "arrayImg": arrayImg,
-    "cargarImagenes": cargarImagenes,
     "descargarDatos": descargarDatos,
     "openModal": openModal,
     "closeModal": closeModal,

@@ -88,7 +88,7 @@ var map;
          responsive.leer(texto);  
          var div = document.getElementById("texto");
          var con = document.createElement("div");
-         con.innerHTML= ' <button type="submit" id="continental" onclick="continental();">Iniciar </button>';
+         con.innerHTML= ' <button type="submit" id="continental" onclick="continental();" class="leap-interactive">Iniciar </button>';
          div.appendChild(con);
      }
      
@@ -254,7 +254,7 @@ var dinamicaDirecion =function(pais){
         else {
             // en caso contrario de no ser el pais  se indica que vuelva e intentar
             responsive.iniciar();  
-             responsive.leer("Mal este pais no es "+direcionEscuela.pais+", Vuelve a intentar");
+             responsive.leer("Mal este país no es "+direcionEscuela.pais+", Vuelve a intentar");
            intentos=intentos+1;
            
         }

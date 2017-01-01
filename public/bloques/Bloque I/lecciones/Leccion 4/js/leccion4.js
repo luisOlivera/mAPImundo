@@ -61,6 +61,8 @@ function getDinamica(){
     
     //Instrucciones de la dinámica
     view.ui.add(toggle, "bottom-left");
+    toggle._imageBackgroundNode.className += " leap-interactive";
+    //console.log(toggle._imageBackgroundNode.className);
     document.getElementById("info").textContent = "Consigue una imagen satelital o una foto aérea de los siguientes países. Selecciona el avión o el satélite según corresponda y llévalo hasta el país solicitado. Acercáte o aléjate lo necesario para conseguir el objetivo.";
     hablar("Deberás conseguir una imagen satelital o una foto aérea de los siguientes países. Selecciona el medio adecuado para obtener lo que se te pide. Encuentra el lugar y acércate o aléjate lo necesario para conseguir el objetivo. Te puedo ayudar a buscar el país pero si aciertas solo ganarás medio punto. Empezemos", getEjercicio);
 }

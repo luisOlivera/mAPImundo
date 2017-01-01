@@ -366,6 +366,39 @@ input[type=password], select {
     border-radius: 6px;
 }
 
+#regresar {
+    background-color: #E63A3A;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    border-radius: 6px;
+}
+
+#regresar:hover {
+    background-color: #C33535;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    border-radius: 6px;
+}
+
+#regresar.hover {
+    background-color: #C33535;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    border-radius: 6px;
+}
+
 
 .imgcontainer {
     text-align: center;
